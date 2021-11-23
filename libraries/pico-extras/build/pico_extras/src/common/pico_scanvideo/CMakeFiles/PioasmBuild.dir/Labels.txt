@@ -1,0 +1,13 @@
+# Target labels
+ PioasmBuild
+# Source files and their labels
+D:/Boards/RP2040/pico-extras/build/pico_extras/src/common/pico_scanvideo/CMakeFiles/PioasmBuild
+D:/Boards/RP2040/pico-extras/build/pico_extras/src/common/pico_scanvideo/CMakeFiles/PioasmBuild.rule
+D:/Boards/RP2040/pico-extras/build/pico_extras/src/common/pico_scanvideo/CMakeFiles/PioasmBuild-complete.rule
+D:/Boards/RP2040/pico-extras/build/pico_extras/src/common/pico_scanvideo/pioasm/src/PioasmBuild-stamp/PioasmBuild-build.rule
+D:/Boards/RP2040/pico-extras/build/pico_extras/src/common/pico_scanvideo/pioasm/src/PioasmBuild-stamp/PioasmBuild-configure.rule
+D:/Boards/RP2040/pico-extras/build/pico_extras/src/common/pico_scanvideo/pioasm/src/PioasmBuild-stamp/PioasmBuild-download.rule
+D:/Boards/RP2040/pico-extras/build/pico_extras/src/common/pico_scanvideo/pioasm/src/PioasmBuild-stamp/PioasmBuild-install.rule
+D:/Boards/RP2040/pico-extras/build/pico_extras/src/common/pico_scanvideo/pioasm/src/PioasmBuild-stamp/PioasmBuild-mkdir.rule
+D:/Boards/RP2040/pico-extras/build/pico_extras/src/common/pico_scanvideo/pioasm/src/PioasmBuild-stamp/PioasmBuild-patch.rule
+D:/Boards/RP2040/pico-extras/build/pico_extras/src/common/pico_scanvideo/pioasm/src/PioasmBuild-stamp/PioasmBuild-update.rule
