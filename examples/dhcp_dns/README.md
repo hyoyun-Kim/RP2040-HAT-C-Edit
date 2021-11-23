@@ -15,14 +15,22 @@ The following serial terminal program is required for DHCP & DNS example test, d
 If you are using W5100S-EVB-Pico, you can skip '1. Combine...'
 
 1. Combine WIZnet Ethernet HAT with Raspberry Pi Pico.
-
 2. Connect ethernet cable to WIZnet Ethernet HAT or W5100S-EVB-Pico ethernet port.
-
 3. Connect Raspberry Pi Pico or W5100S-EVB-Pico to desktop or laptop using 5 pin micro USB cable.
 
 
 
-## Step 3: Setup DHCP & DNS Example
+## Step 3: Add Cmake: Configure Environment Value
+
+1. Open Cmake Tools Extenstion Settings
+2. Add Cmake: Configure Environment Item as PICO_SDK_PATH
+3. Add Cmake: Configure Environment Value as 'D:/RP2040-HAT-C/libraries/pico-sdk'
+
+![][link-cmake_configure]
+
+
+
+## Step 4: Setup DHCP & DNS Example
 
 To test the DHCP & DNS example, minor settings shall be done in code.
 
@@ -76,7 +84,7 @@ static uint8_t g_dns_target_domain[] = "www.wiznet.io";
 
 
 
-## Step 4: Build
+## Step 5: Build
 
 1. After completing the DHCP & DNS example configuration, click 'build' in the status bar at the bottom of Visual Studio Code or press the 'F7' button on the keyboard to build.
 
@@ -84,7 +92,7 @@ static uint8_t g_dns_target_domain[] = "www.wiznet.io";
 
 
 
-## Step 5: Upload and Run
+## Step 6: Upload and Run
 
 1. While pressing the BOOTSEL button of Raspberry Pi Pico or W5100S-EVB-Pico power on the board, the USB mass storage 'RPI-RP2' is automatically mounted.
 
@@ -109,6 +117,7 @@ Link
 -->
 
 [link-tera_term]: https://osdn.net/projects/ttssh2/releases/
-[link-raspberry_pi_pico_usb_mass_storage]: https://github.com/Wiznet/RP2040-HAT-C/blob/main/static/images/dhcp_dns/raspberry_pi_pico_usb_mass_storage.png
-[link-connect_to_serial_com_port]: https://github.com/Wiznet/RP2040-HAT-C/blob/main/static/images/dhcp_dns/connect_to_serial_com_port.png
-[link-see_network_information_ip_assigned_by_dhcp_of_raspberry_pi_pico_and_get_ip_through_dns]: https://github.com/Wiznet/RP2040-HAT-C/blob/main/static/images/dhcp_dns/see_network_information_ip_assigned_by_dhcp_of_raspberry_pi_pico_and_get_ip_through_dns.png
+[link-cmake_configure]: https://github.com/hyoyun-Kim/blob/main/static/images/common/cmake_configre.png
+[link-raspberry_pi_pico_usb_mass_storage]: https://github.com/hyoyun-Kim/blob/main/static/images/dhcp_dns/raspberry_pi_pico_usb_mass_storage.png
+[link-connect_to_serial_com_port]: https://github.com/hyoyun-Kim/blob/main/static/images/dhcp_dns/connect_to_serial_com_port.png
+[link-see_network_information_ip_assigned_by_dhcp_of_raspberry_pi_pico_and_get_ip_through_dns]: https://github.com/hyoyun-Kim/blob/main/static/images/dhcp_dns/see_network_information_ip_assigned_by_dhcp_of_raspberry_pi_pico_and_get_ip_through_dns.png
