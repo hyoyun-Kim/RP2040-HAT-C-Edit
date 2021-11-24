@@ -23,11 +23,21 @@ If you are using W5100S-EVB-Pico, you can skip '1. Combine...'
 
 
 
-## Step 3: Setup FTP Client Example
+## Step 3: Add Cmake: Configure Environment Value
+
+1. Open Cmake Tools Extenstion Settings
+2. Add Cmake: Configure Environment Item as PICO_SDK_PATH
+3. Add Cmake: Configure Environment Value as 'D:/RP2040/RP2040-HAT-C/libraries/pico-sdk'
+
+![][link-cmake_configure]
+
+
+
+## Step 4: Setup FTP Client Example
 
 To test the FTP Client example, minor settings shall be done in code.
 
-1. Setup SPI port and pin.
+1. Setup SPI port and pin in 'RP2040-HAT-C/port/ioLibrary_Driver/w5x00spi.h' directory.
 
 Setup the SPI interface you use.
 
@@ -49,7 +59,7 @@ If you want to test with the ftp_client example using SPI DMA, uncomment USE_SPI
 //#define USE_SPI_DMA // if you want to use SPI DMA, uncomment.
 ```
 
-2. Setup network configuration such as IP.
+2. Setup network configuration such as IP in 'RP2040-HAT-C/examples/ftp/client/w5x00_ftp_client.c' directory.
 
 Setup IP and other network settings to suit your network environment.
 
@@ -58,24 +68,24 @@ Setup IP and other network settings to suit your network environment.
 static wiz_NetInfo g_net_info =
     {
         .mac = {0x00, 0x08, 0xDC, 0x12, 0x34, 0x56}, // MAC address
-        .ip = {192, 168, 1, 2},                      // IP address
+        .ip = {192, 168, 11, 2},                     // IP address
         .sn = {255, 255, 255, 0},                    // Subnet Mask
-        .gw = {192, 168, 1, 1},                      // Gateway
+        .gw = {192, 168, 11, 1},                     // Gateway
         .dns = {8, 8, 8, 8},                         // DNS server
         .dhcp = NETINFO_STATIC                       // DHCP enable/disable
 };
 ```
 
-3. Setup FTP client configuration in ftpc.c in 'RP2040-HAT-C/libraries/ioLibrary_Driver/Internet/FTPClient/' directory.
+3. Setup FTP client configuration in ftpc.c in 'RP2040-HAT-C/libraries/ioLibrary_Driver/Internet/FTPClient/ftpc.c' directory.
 
 ```cpp
-uint8_t FTP_destip[4] = {192, 168, 10, 230};    // For FTP client examples; destination network info
+uint8_t FTP_destip[4] = {192, 168, 11, 230};    // For FTP client examples; destination network info
 uint16_t FTP_destport = 21;                     // For FTP client examples; destination network info
 ```
 
 
 
-## Step 4: Setup FileZilla Server program
+## Step 5: Setup FileZilla Server program
 
 1. Execute FileZilla server program and open FTP server.
 
@@ -95,7 +105,7 @@ uint16_t FTP_destport = 21;                     // For FTP client examples; dest
 
 
 
-## Step 5: Build
+## Step 6: Build
 
 1. After completing the ftp_client example configuration, click 'build' in the status bar at the bottom of Visual Studio Code or press the 'F7' button on the keyboard to build.
 
@@ -103,7 +113,7 @@ uint16_t FTP_destport = 21;                     // For FTP client examples; dest
 
 
 
-## Step 6: Upload and Run
+## Step 7: Upload and Run
 
 1. While pressing the BOOTSEL button of Raspberry Pi Pico or W5100S-EVB-Pico power on the board, the USB mass storage 'RPI-RP2' is automatically mounted.
 
@@ -150,15 +160,16 @@ Link
 [link-tera_term]: https://osdn.net/projects/ttssh2/releases/
 [link-hercules]: https://www.hw-group.com/software/hercules-setup-utility
 [link-filezilla_server]: https://osdn.net/projects/filezilla/downloads/67734/FileZilla_Server-0_9_60.exe/
-[link-filezilla_server_program_open]: https://github.com/Wiznet/RP2040-HAT-C/blob/main/static/images/ftp/client/filezilla_server_program_open.png
-[link-filezilla_add_user]: https://github.com/Wiznet/RP2040-HAT-C/blob/main/static/images/ftp/client/filezilla_add_user.png
-[link-filezilla_set_path]: https://github.com/Wiznet/RP2040-HAT-C/blob/main/static/images/ftp/client/filezilla_set_path.png
-[link-filezilla_general_settings]: https://github.com/Wiznet/RP2040-HAT-C/blob/main/static/images/ftp/client/filezilla_general_settings.png
-[link-raspberry_pi_pico_usb_mass_storage]: https://github.com/Wiznet/RP2040-HAT-C/blob/main/static/images/ftp/client/raspberry_pi_pico_usb_mass_storage.png
-[link-connect_to_serial_com_port]: https://github.com/Wiznet/RP2040-HAT-C/blob/main/static/images/ftp/client/serial_com_port.png
-[link-see_network_information_of_raspberry_pi_pico]: https://github.com/Wiznet/RP2040-HAT-C/blob/main/static/images/ftp/client/network_information.png
-[link-input_user_id]: https://github.com/Wiznet/RP2040-HAT-C/blob/main/static/images/ftp/client/input_user_id.png
-[link-input_password]: https://github.com/Wiznet/RP2040-HAT-C/blob/main/static/images/ftp/client/input_password.png
-[link-press_num1]: https://github.com/Wiznet/RP2040-HAT-C/blob/main/static/images/ftp/client/press_num1.png
-[link-ftp_server_directory]: https://github.com/Wiznet/RP2040-HAT-C/blob/main/static/images/ftp/client/ftp_server_directory.png
-[link-ftp_wireshark_result]: https://github.com/Wiznet/RP2040-HAT-C/blob/main/static/images/ftp/client/ftp_wireshark_result.png
+[link-cmake_configure]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/main/static/images/common/cmake_configure.png
+[link-filezilla_server_program_open]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/main/static/images/ftp/client/filezilla_server_program_open.png
+[link-filezilla_add_user]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/main/static/images/ftp/client/filezilla_add_user.png
+[link-filezilla_set_path]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/main/static/images/ftp/client/filezilla_set_path.png
+[link-filezilla_general_settings]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/main/static/images/ftp/client/filezilla_general_settings.png
+[link-raspberry_pi_pico_usb_mass_storage]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/main/static/images/ftp/client/raspberry_pi_pico_usb_mass_storage.png
+[link-connect_to_serial_com_port]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/main/static/images/ftp/client/serial_com_port.png
+[link-see_network_information_of_raspberry_pi_pico]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/main/static/images/ftp/client/network_information.png
+[link-input_user_id]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/main/static/images/ftp/client/input_user_id.png
+[link-input_password]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/main/static/images/ftp/client/input_password.png
+[link-press_num1]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/main/static/images/ftp/client/press_num1.png
+[link-ftp_server_directory]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/main/static/images/ftp/client/ftp_server_directory.png
+[link-ftp_wireshark_result]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/main/static/images/ftp/client/ftp_wireshark_result.png

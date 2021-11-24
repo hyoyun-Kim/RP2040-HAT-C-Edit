@@ -24,7 +24,7 @@ If you are using W5100S-EVB-Pico, you can skip '1. Combine...'
 
 1. Open Cmake Tools Extenstion Settings
 2. Add Cmake: Configure Environment Item as PICO_SDK_PATH
-3. Add Cmake: Configure Environment Value as 'D:/RP2040-HAT-C/libraries/pico-sdk'
+3. Add Cmake: Configure Environment Value as 'D:/RP2040/RP2040-HAT-C/libraries/pico-sdk'
 
 ![][link-cmake_configure]
 
@@ -34,7 +34,7 @@ If you are using W5100S-EVB-Pico, you can skip '1. Combine...'
 
 To test the DHCP & DNS example, minor settings shall be done in code.
 
-1. Setup SPI port and pin.
+1. Setup SPI port and pin in 'RP2040-HAT-C/port/ioLibrary_Driver/w5x00spi.h' directory.
 
 Setup the SPI interface you use.
 
@@ -56,7 +56,7 @@ If you want to test with the DHCP & DNS example using SPI DMA, uncomment USE_SPI
 //#define USE_SPI_DMA // if you want to use SPI DMA, uncomment.
 ```
 
-2. Setup network configuration such as IP.
+2. Setup network configuration such as IP in 'RP2040-HAT-C/examples/dhcp_dns/w5x00_dhcp_dns.c' directory.
 
 Setup IP, other network settings to suit your network environment and whether to use DHCP.
 
