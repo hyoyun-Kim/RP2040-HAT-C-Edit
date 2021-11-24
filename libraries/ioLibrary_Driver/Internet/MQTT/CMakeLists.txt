@@ -6,8 +6,8 @@ add_library(MQTT_FILES STATIC
 add_subdirectory(MQTTPacket)
 
 target_include_directories(MQTT_FILES PUBLIC
-        ../../Ethernet
-        ${CMAKE_CURRENT_SOURCE_DIR}
+        ${CMAKE_SOURCE_DIR}/libraries/ioLibrary_Driver/Ethernet
+        ${CMAKE_SOURCE_DIR}/libraries/ioLibrary_Driver/Internet/MQTT
         )
 
 target_link_libraries(MQTT_FILES PUBLIC

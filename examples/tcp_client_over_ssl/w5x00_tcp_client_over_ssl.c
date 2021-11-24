@@ -53,9 +53,9 @@
 static wiz_NetInfo g_net_info =
     {
         .mac = {0x00, 0x08, 0xDC, 0x12, 0x34, 0x56}, // MAC address
-        .ip = {192, 168, 1, 15},                     // IP address
+        .ip = {192, 168, 11, 2},                     // IP address
         .sn = {255, 255, 255, 0},                    // Subnet Mask
-        .gw = {192, 168, 1, 1},                      // Gateway
+        .gw = {192, 168, 11, 1},                     // Gateway
         .dns = {8, 8, 8, 8},                         // DNS server
         .dhcp = NETINFO_STATIC                       // DHCP enable/disable
 };
@@ -64,7 +64,7 @@ static wiz_NetInfo g_net_info =
 static uint8_t g_ssl_buf[ETHERNET_BUF_MAX_SIZE] = {
     0,
 };
-static uint8_t g_ssl_target_ip[4] = {192, 168, 1, 2};
+static uint8_t g_ssl_target_ip[4] = {192, 168, 11, 3};
 
 static mbedtls_ctr_drbg_context g_ctr_drbg;
 static mbedtls_ssl_context g_ssl;

@@ -3,5 +3,6 @@ add_library(SNTP_FILES STATIC
         )
 
 target_include_directories(SNTP_FILES PUBLIC
-        ../../Ethernet
+        ${CMAKE_SOURCE_DIR}/libraries/ioLibrary_Driver/Ethernet
+        ${CMAKE_SOURCE_DIR}/libraries/ioLibrary_Driver/Internet/SNTP
         )

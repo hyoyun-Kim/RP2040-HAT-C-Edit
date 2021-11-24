@@ -7,7 +7,7 @@ target_include_directories(SPI_FILES PUBLIC
         ${CMAKE_SOURCE_DIR}/port/ioLibrary_Driver
         )
 
-target_link_libraries(SPI_FILES PUBLIC
+target_link_libraries(SPI_FILES PRIVATE
         pico_stdlib
         hardware_spi
         hardware_dma        

@@ -2,13 +2,7 @@ add_executable(w5x00_ftp_server
         w5x00_ftp_server.c
         )
 
-target_include_directories(w5x00_ftp_server PUBLIC
-        ${CMAKE_SOURCE_DIR}/libraries/ioLibrary_Driver/Ethernet
-        ${CMAKE_SOURCE_DIR}/libraries/ioLibrary_Driver/Internet/FTPServer
-	${CMAKE_CURRENT_SOURCE_DIR}
-        )
-
-target_link_libraries(w5x00_ftp_server PUBLIC
+target_link_libraries(w5x00_ftp_server PRIVATE
         pico_stdlib
         hardware_spi
         hardware_dma

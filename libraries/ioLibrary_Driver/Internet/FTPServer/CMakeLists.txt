@@ -3,6 +3,6 @@ add_library(FTPSERVER_FILES STATIC
         )
 
 target_include_directories(FTPSERVER_FILES PUBLIC
-        ../../Ethernet
-        ${CMAKE_CURRENT_SOURCE_DIR}
+        ${CMAKE_SOURCE_DIR}/libraries/ioLibrary_Driver/Ethernet
+        ${CMAKE_SOURCE_DIR}/libraries/ioLibrary_Driver/Internet/FTPServer
         )

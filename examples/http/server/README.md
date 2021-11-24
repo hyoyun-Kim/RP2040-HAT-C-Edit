@@ -26,7 +26,7 @@ If you are using W5100S-EVB-Pico, you can skip '1. Combine...'
 
 To test the HTTP Server example, minor settings shall be done in code.
 
-1. Setup SPI port and pin.
+1. Setup SPI port and pin in 'RP2040-HAT-C/port/ioLibrary_Driver/w5x00spi.h' directory.
 
 Setup the SPI interface you use.
 
@@ -48,7 +48,7 @@ If you want to test with the HTTP Server example using SPI DMA, uncomment USE_SP
 //#define USE_SPI_DMA // if you want to use SPI DMA, uncomment.
 ```
 
-2. Setup network configuration such as IP.
+2. Setup network configuration such as IP in 'RP2040-HAT-C/examples/http/server/w5x00_http_server.c' directory.
 
 Setup IP and other network settings to suit your network environment.
 
@@ -106,8 +106,8 @@ Link
 -->
 
 [link-tera_term]: https://osdn.net/projects/ttssh2/releases/
-[link-raspberry_pi_pico_usb_mass_storage]: https://github.com/Wiznet/RP2040-HAT-C/blob/main/static/images/dhcp_dns/raspberry_pi_pico_usb_mass_storage.png
-[link-connect_to_serial_com_port]: https://github.com/Wiznet/RP2040-HAT-C/blob/main/static/images/dhcp_dns/connect_to_serial_com_port.png
-[link-see_network_information_of_raspberry_pi_pico_and_open_http_server]: https://github.com/Wiznet/RP2040-HAT-C/blob/main/static/images/http/server/see_network_information_of_raspberry_pi_pico_and_open_http_server.png
-[link-connect_to_http_server_1]: https://github.com/Wiznet/RP2040-HAT-C/blob/main/static/images/http/server/connect_to_http_server_1.png
-[link-connect_to_http_server_2]: https://github.com/Wiznet/RP2040-HAT-C/blob/main/static/images/http/server/connect_to_http_server_2.png
+[link-raspberry_pi_pico_usb_mass_storage]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/main/static/images/dhcp_dns/raspberry_pi_pico_usb_mass_storage.png
+[link-connect_to_serial_com_port]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/main/static/images/dhcp_dns/connect_to_serial_com_port.png
+[link-see_network_information_of_raspberry_pi_pico_and_open_http_server]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/main/static/images/http/server/see_network_information_of_raspberry_pi_pico_and_open_http_server.png
+[link-connect_to_http_server_1]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/main/static/images/http/server/connect_to_http_server_1.png
+[link-connect_to_http_server_2]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/main/static/images/http/server/connect_to_http_server_2.png

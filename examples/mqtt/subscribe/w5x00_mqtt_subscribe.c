@@ -56,13 +56,13 @@
   */
 /* Network */
 static wiz_NetInfo g_net_info =
-	{
-		.mac = {0x00, 0x08, 0xDC, 0x12, 0x34, 0x56}, // MAC address
-		.ip = {192, 168, 1, 100},					 // IP address
-		.sn = {255, 255, 255, 0},					 // Subnet Mask
-		.gw = {192, 168, 1, 1},					 	 // Gateway
-		.dns = {8, 8, 8, 8},						 // DNS server
-		.dhcp = NETINFO_STATIC						 // DHCP enable/disable
+    {
+        .mac = {0x00, 0x08, 0xDC, 0x12, 0x34, 0x56}, // MAC address
+        .ip = {192, 168, 11, 2},                     // IP address
+        .sn = {255, 255, 255, 0},                    // Subnet Mask
+        .gw = {192, 168, 11, 1},                     // Gateway
+        .dns = {8, 8, 8, 8},                         // DNS server
+        .dhcp = NETINFO_STATIC                       // DHCP enable/disable
 };
 
 /* MQTT */

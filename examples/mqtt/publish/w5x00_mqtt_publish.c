@@ -56,13 +56,13 @@
   */
 /* Network */
 static wiz_NetInfo g_net_info =
-	{
-		.mac = {0x00, 0x08, 0xDC, 0x12, 0x34, 0x56}, // MAC address
-		.ip = {192, 168, 1, 15},					 // IP address
-		.sn = {255, 255, 255, 0},					 // Subnet Mask
-		.gw = {192, 168, 1, 1},					 	 // Gateway
-		.dns = {8, 8, 8, 8},						 // DNS server
-		.dhcp = NETINFO_STATIC						 // DHCP enable/disable
+    {
+        .mac = {0x00, 0x08, 0xDC, 0x12, 0x34, 0x56}, // MAC address
+        .ip = {192, 168, 11, 2},                     // IP address
+        .sn = {255, 255, 255, 0},                    // Subnet Mask
+        .gw = {192, 168, 11, 1},                     // Gateway
+        .dns = {8, 8, 8, 8},                         // DNS server
+        .dhcp = NETINFO_STATIC                       // DHCP enable/disable
 };
 
 /* Critical section */
@@ -82,7 +82,7 @@ static uint8_t g_mqtt_send_buf[ETHERNET_BUF_MAX_SIZE] = {
 static uint8_t g_mqtt_recv_buf[ETHERNET_BUF_MAX_SIZE] = {
 	0,
 };
-static uint8_t g_mqtt_broker_ip[4] = {192, 168, 1, 2};
+static uint8_t g_mqtt_broker_ip[4] = {192, 168, 11, 3};
 static Network g_mqtt_network;
 static MQTTClient g_mqtt_client;
 static MQTTPacket_connectData g_mqtt_packet_connect_data = MQTTPacket_connectData_initializer;

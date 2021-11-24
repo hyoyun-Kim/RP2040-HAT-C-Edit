@@ -11,6 +11,6 @@ add_library(MQTTPACKET_FILES STATIC
 		MQTTUnsubscribeServer.c		
         )
 
-target_include_directories(MQTTPACKET_FILES PUBLIC
-        ${CMAKE_CURRENT_SOURCE_DIR}
+target_include_directories(MQTTPACKET_FILES INTERFACE
+		${CMAKE_SOURCE_DIR}/libraries/ioLibrary_Driver/Internet/MQTT/MQTTPacket/src
         )

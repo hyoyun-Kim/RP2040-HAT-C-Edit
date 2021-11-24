@@ -2,12 +2,7 @@ add_executable(w5x00_mqtt_publish
         w5x00_mqtt_publish.c
         )
 
-target_include_directories(w5x00_mqtt_publish PUBLIC
-        ${CMAKE_SOURCE_DIR}/libraries/ioLibrary_Driver/Ethernet
-        ${CMAKE_SOURCE_DIR}/libraries/ioLibrary_Driver/Internet/MQTT
-        )
-
-target_link_libraries(w5x00_mqtt_publish PUBLIC
+target_link_libraries(w5x00_mqtt_publish PRIVATE
         pico_stdlib
         hardware_spi
         hardware_dma

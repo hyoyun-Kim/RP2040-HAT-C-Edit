@@ -5,8 +5,8 @@ add_library(ETHERNET_FILES STATIC
 
 add_subdirectory(W5100S)
 
-target_include_directories(ETHERNET_FILES PUBLIC
-        ${CMAKE_CURRENT_SOURCE_DIR}
+target_include_directories(ETHERNET_FILES INTERFACE
+        ${CMAKE_SOURCE_DIR}/libraries/ioLibrary_Driver/Ethernet  
 #        ${CMAKE_CURRENT_SOURCE_DIR}/W5100
         ${CMAKE_CURRENT_SOURCE_DIR}/W5100S
 #        ${CMAKE_CURRENT_SOURCE_DIR}/W5200

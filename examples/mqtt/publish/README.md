@@ -27,7 +27,7 @@ If you are using W5100S-EVB-Pico, you can skip '1. Combine...'
 
 To test the MQTT Publish example, minor settings shall be done in code.
 
-1. Setup SPI port and pin.
+1. Setup SPI port and pin in 'RP2040-HAT-C/port/ioLibrary_Driver/w5x00spi.h' directory.
 
 Setup the SPI interface you use.
 
@@ -49,7 +49,7 @@ If you want to test with the MQTT Publish example using SPI DMA, uncomment USE_S
 //#define USE_SPI_DMA // if you want to use SPI DMA, uncomment.
 ```
 
-2. Setup network configuration such as IP.
+2. Setup network configuration such as IP in 'RP2040-HAT-C/examples/mqtt/publish/w5x00_mqtt_publish.c' directory.
 
 Setup IP and other network settings to suit your network environment.
 
@@ -66,7 +66,7 @@ static wiz_NetInfo g_net_info =
 };
 ```
 
-3. Setup MQTT configuration.
+3. Setup MQTT configuration in 'RP2040-HAT-C/examples/mqtt/publish/w5x00_mqtt_publish.c' directory.
 
 In the MQTT configuration, the broker IP is the IP of your desktop or laptop where broker will be created.
 
@@ -143,10 +143,10 @@ Link
 
 [link-tera_term]: https://osdn.net/projects/ttssh2/releases/
 [link-mosquitto]: https://mosquitto.org/download/
-[link-raspberry_pi_pico_usb_mass_storage]: https://github.com/Wiznet/RP2040-HAT-C/blob/main/static/images/mqtt/publish/raspberry_pi_pico_usb_mass_storage.png
-[link-connect_to_serial_com_port]: https://github.com/Wiznet/RP2040-HAT-C/blob/main/static/images/mqtt/publish/connect_to_serial_com_port.png
-[link-run_mosquitto]: https://github.com/Wiznet/RP2040-HAT-C/blob/main/static/images/mqtt/publish/run_mosquitto.png
-[link-create_mqtt_broker_using_mosquitto]: https://github.com/Wiznet/RP2040-HAT-C/blob/main/static/images/mqtt/publish/create_mqtt_broker_using_mosquitto.png
-[link-see_network_information_of_raspberry_pi_pico_connecting_to_broker_and_publishing_message_1]: https://github.com/Wiznet/RP2040-HAT-C/blob/main/static/images/mqtt/publish/see_network_information_of_raspberry_pi_pico_connecting_to_broker_and_publishing_message_1.png
-[link-see_network_information_of_raspberry_pi_pico_connecting_to_broker_and_publishing_message_2]: https://github.com/Wiznet/RP2040-HAT-C/blob/main/static/images/mqtt/publish/see_network_information_of_raspberry_pi_pico_connecting_to_broker_and_publishing_message_2.png
+[link-raspberry_pi_pico_usb_mass_storage]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/main/static/images/mqtt/publish/raspberry_pi_pico_usb_mass_storage.png
+[link-connect_to_serial_com_port]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/main/static/images/mqtt/publish/connect_to_serial_com_port.png
+[link-run_mosquitto]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/main/static/images/mqtt/publish/run_mosquitto.png
+[link-create_mqtt_broker_using_mosquitto]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/main/static/images/mqtt/publish/create_mqtt_broker_using_mosquitto.png
+[link-see_network_information_of_raspberry_pi_pico_connecting_to_broker_and_publishing_message_1]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/main/static/images/mqtt/publish/see_network_information_of_raspberry_pi_pico_connecting_to_broker_and_publishing_message_1.png
+[link-see_network_information_of_raspberry_pi_pico_connecting_to_broker_and_publishing_message_2]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/main/static/images/mqtt/publish/see_network_information_of_raspberry_pi_pico_connecting_to_broker_and_publishing_message_2.png
 [link-authentication_methods]: https://mosquitto.org/documentation/authentication-methods/

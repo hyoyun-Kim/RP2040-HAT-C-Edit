@@ -27,7 +27,7 @@ If you are using W5100S-EVB-Pico, you can skip '1. Combine...'
 
 To test the FTP Server example, minor settings shall be done in code.
 
-1. Setup SPI port and pin.
+1. Setup SPI port and pin in 'RP2040-HAT-C/port/ioLibrary_Driver/w5x00spi.h' directory.
 
 Setup the SPI interface you use.
 
@@ -49,7 +49,7 @@ If you want to test with the FTP Server example using SPI DMA, uncomment USE_SPI
 //#define USE_SPI_DMA // if you want to use SPI DMA, uncomment.
 ```
 
-2. Setup network configuration such as IP.
+2. Setup network configuration such as IP in 'RP2040-HAT-C/examples/ftp/server/w5x00_ftp_server.c' directory.
 
 Setup IP and other network settings to suit your network environment.
 
@@ -134,16 +134,16 @@ Link
 
 [link-tera_term]: https://osdn.net/projects/ttssh2/releases/
 [link-winscp]: https://winscp.net/eng/download.php
-[link-raspberry_pi_pico_usb_mass_storage]: https://github.com/Wiznet/RP2040-HAT-C/blob/main/static/images/ftp/server/raspberry_pi_pico_usb_mass_storage.png
-[link-connect_to_serial_com_port]: https://github.com/Wiznet/RP2040-HAT-C/blob/main/static/images/ftp/server/connect_to_serial_com_port.png
-[link-see_network_information_of_raspberry_pi_pico_and_open_ftp_server]: https://github.com/Wiznet/RP2040-HAT-C/blob/main/static/images/ftp/server/see_network_information_of_raspberry_pi_pico_and_open_ftp_server.png
-[link-run_winscp]: https://github.com/Wiznet/RP2040-HAT-C/blob/main/static/images/ftp/server/run_winscp.png
-[link-enter_ftp_server_ip_or_host_name_and_port]: https://github.com/Wiznet/RP2040-HAT-C/blob/main/static/images/ftp/server/enter_ftp_server_ip_or_host_name_and_port.png
-[link-enter_user_name]: https://github.com/Wiznet/RP2040-HAT-C/blob/main/static/images/ftp/server/enter_user_name.png
-[link-enter_password]: https://github.com/Wiznet/RP2040-HAT-C/blob/main/static/images/ftp/server/enter_password.png
-[link-connect_to_ftp_server_1]: https://github.com/Wiznet/RP2040-HAT-C/blob/main/static/images/ftp/server/connect_to_ftp_server_1.png
-[link-connect_to_ftp_server_2]: https://github.com/Wiznet/RP2040-HAT-C/blob/main/static/images/ftp/server/connect_to_ftp_server_2.png
-[link-download_selected_remote_file_to_local_directory_1]: https://github.com/Wiznet/RP2040-HAT-C/blob/main/static/images/ftp/server/download_selected_remote_file_to_local_directory_1.png
-[link-download_selected_remote_file_to_local_directory_2]: https://github.com/Wiznet/RP2040-HAT-C/blob/main/static/images/ftp/server/download_selected_remote_file_to_local_directory_2.png
-[link-upload_selected_local_file_to_remote_directory_1]: https://github.com/Wiznet/RP2040-HAT-C/blob/main/static/images/ftp/server/upload_selected_local_file_to_remote_directory_1.png
-[link-upload_selected_local_file_to_remote_directory_2]: https://github.com/Wiznet/RP2040-HAT-C/blob/main/static/images/ftp/server/upload_selected_local_file_to_remote_directory_2.png
+[link-raspberry_pi_pico_usb_mass_storage]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/main/static/images/ftp/server/raspberry_pi_pico_usb_mass_storage.png
+[link-connect_to_serial_com_port]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/main/static/images/ftp/server/connect_to_serial_com_port.png
+[link-see_network_information_of_raspberry_pi_pico_and_open_ftp_server]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/main/static/images/ftp/server/see_network_information_of_raspberry_pi_pico_and_open_ftp_server.png
+[link-run_winscp]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/main/static/images/ftp/server/run_winscp.png
+[link-enter_ftp_server_ip_or_host_name_and_port]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/main/static/images/ftp/server/enter_ftp_server_ip_or_host_name_and_port.png
+[link-enter_user_name]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/main/static/images/ftp/server/enter_user_name.png
+[link-enter_password]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/main/static/images/ftp/server/enter_password.png
+[link-connect_to_ftp_server_1]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/main/static/images/ftp/server/connect_to_ftp_server_1.png
+[link-connect_to_ftp_server_2]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/main/static/images/ftp/server/connect_to_ftp_server_2.png
+[link-download_selected_remote_file_to_local_directory_1]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/main/static/images/ftp/server/download_selected_remote_file_to_local_directory_1.png
+[link-download_selected_remote_file_to_local_directory_2]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/main/static/images/ftp/server/download_selected_remote_file_to_local_directory_2.png
+[link-upload_selected_local_file_to_remote_directory_1]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/main/static/images/ftp/server/upload_selected_local_file_to_remote_directory_1.png
+[link-upload_selected_local_file_to_remote_directory_2]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/main/static/images/ftp/server/upload_selected_local_file_to_remote_directory_2.png
