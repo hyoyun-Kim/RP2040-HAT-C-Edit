@@ -274,7 +274,7 @@ static void wizchip_dhcp_assign(void)
     /* Network initialize */
     network_initialize(g_net_info); // apply from DHCP
 
-    print_network_information(g_net_info);  // 21_11_17
+    print_network_information(g_net_info);
     printf(" DHCP leased time : %ld seconds\n", getDHCPLeasetime());
 }
 
