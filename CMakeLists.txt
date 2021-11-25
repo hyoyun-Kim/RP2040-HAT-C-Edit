@@ -35,9 +35,7 @@ if(NOT DEFINED WIZNET_DIR)
 endif()
 
 set(ENABLE_PROGRAMS OFF CACHE BOOL "Build mbedtls programs")
-
 set(ENABLE_TESTING OFF CACHE BOOL "Build mbedtls testing")
-#add_definitions(-DMBEDTLS_CONFIG_FILE="${CMAKE_SOURCE_DIR}/examples/tcp_client_over_ssl/ssl_config.h")
 add_definitions(-DMBEDTLS_CONFIG_FILE="${PORT_DIR}/mbedtls/inc/ssl_config.h")
 add_definitions(-DSET_TRUSTED_CERT_IN_SAMPLES)
 
@@ -51,7 +49,7 @@ add_subdirectory(${PORT_DIR})
 
 # Set compile options
 add_compile_options(
-		-Wall
+        -Wall
         -Wno-format          # int != int32_t as far as the compiler is concerned because gcc has int32_t as long int
         -Wno-unused-function # we have some for the docs that aren't called
         -Wno-maybe-uninitialized
