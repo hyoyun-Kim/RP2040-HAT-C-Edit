@@ -1,3 +1,0 @@
-file(REMOVE_RECURSE
-  "libW5100S_FILES.a"
-)

@@ -1,3 +1,0 @@
-file(REMOVE_RECURSE
-  "libFTPSERVER_FILES.a"
-)
