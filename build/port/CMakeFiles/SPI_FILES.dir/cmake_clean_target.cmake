@@ -1,0 +1,3 @@
+file(REMOVE_RECURSE
+  "libSPI_FILES.a"
+)

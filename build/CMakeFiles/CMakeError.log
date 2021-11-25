@@ -1,0 +1,43 @@
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: C:/Program Files (x86)/GNU Arm Embedded Toolchain/10 2020-q4-major/bin/arm-none-eabi-gcc.exe 
+Build flags: ;-mcpu=cortex-m0plus;-mthumb
+Id flags:  
+
+The output was:
+1
+c:/program files (x86)/gnu arm embedded toolchain/10 2020-q4-major/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/bin/ld.exe: c:/program files (x86)/gnu arm embedded toolchain/10 2020-q4-major/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-exit.o): in function `exit':
+exit.c:(.text.exit+0x18): undefined reference to `_exit'
+collect2.exe: error: ld returned 1 exit status
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: C:/Program Files (x86)/GNU Arm Embedded Toolchain/10 2020-q4-major/bin/arm-none-eabi-g++.exe 
+Build flags: ;-mcpu=cortex-m0plus;-mthumb
+Id flags:  
+
+The output was:
+1
+c:/program files (x86)/gnu arm embedded toolchain/10 2020-q4-major/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/bin/ld.exe: c:/program files (x86)/gnu arm embedded toolchain/10 2020-q4-major/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-exit.o): in function `exit':
+exit.c:(.text.exit+0x18): undefined reference to `_exit'
+collect2.exe: error: ld returned 1 exit status
+
+
+Performing C SOURCE FILE Test C_COMPILER_SUPPORTS_WFORMAT_SIGNEDNESS failed with the following output:
+Change Dir: D:/Boards/RP2040/RP2040-HAT-C-Edit/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):nmake -f Makefile /nologo cmTC_ef749\fast && 	"C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\VC\Tools\MSVC\14.29.30133\bin\HostX86\x86\nmake.exe"  -f CMakeFiles\cmTC_ef749.dir\build.make /nologo -L                  CMakeFiles\cmTC_ef749.dir\build
+Building C object CMakeFiles/cmTC_ef749.dir/src.c.obj
+	C:\PROGRA~2\GNUARM~1\102020~1\bin\AR19DD~1.EXE -DC_COMPILER_SUPPORTS_WFORMAT_SIGNEDNESS  -mcpu=cortex-m0plus -mthumb -Wall -Wextra -Wwrite-strings -Wvla -Wlogical-op -Wshadow    -Wformat-signedness -o CMakeFiles\cmTC_ef749.dir\src.c.obj -c D:\Boards\RP2040\RP2040-HAT-C-Edit\build\CMakeFiles\CMakeTmp\src.c
+Linking C executable cmTC_ef749.elf
+	C:\PROGRA~2\GNUARM~1\102020~1\bin\AR19DD~1.EXE -mcpu=cortex-m0plus -mthumb -Wall -Wextra -Wwrite-strings -Wvla -Wlogical-op -Wshadow  -Wl,--build-id=none "CMakeFiles\cmTC_ef749.dir\src.c.obj"  -o cmTC_ef749.elf
+c:/progra~2/gnuarm~1/102020~1/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/bin/ld.exe: c:/progra~2/gnuarm~1/102020~1/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libc.a(lib_a-exit.o): in function `exit':
+exit.c:(.text.exit+0x18): undefined reference to `_exit'
+collect2.exe: error: ld returned 1 exit status
+NMAKE : fatal error U1077: 'C:\PROGRA~2\GNUARM~1\102020~1\bin\AR19DD~1.EXE' : '0x1' 반환 코드입니다.
+Stop.
+NMAKE : fatal error U1077: '"C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\VC\Tools\MSVC\14.29.30133\bin\HostX86\x86\nmake.exe"' : '0x2' 반환 코드입니다.
+Stop.
+
+
+Source file was:
+int main(void) { return 0; }
