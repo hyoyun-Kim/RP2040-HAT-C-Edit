@@ -5,12 +5,7 @@
   */
 #include <stdio.h>
 
-#include "pico/stdlib.h"
-#include "pico/binary_info.h"
-#include "pico/critical_section.h"
-#include "hardware/spi.h"
-#include "hardware/dma.h"
-#include "hardware/clocks.h"
+#include "port_common.h"
 
 #include "wizchip_conf.h"
 #include "w5x00_spi.h"
