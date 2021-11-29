@@ -15,7 +15,9 @@
   * Variables
   * ----------------------------------------------------------------------------------------------------
   */
-static volatile uint32_t g_devtime_msec = 0;
+static struct repeating_timer g_timer;
+
+void (*callback_ptr)(void);
 
 /**
   * ----------------------------------------------------------------------------------------------------
@@ -23,12 +25,18 @@ static volatile uint32_t g_devtime_msec = 0;
   * ----------------------------------------------------------------------------------------------------
   */
 /* Timer */
-bool repeating_timer_callback(struct repeating_timer *t)
+void wizchip_1ms_timer_initialize(void (*callback)(void))
 {
-    g_devtime_msec++;
+  callback_ptr = callback;
+  add_repeating_timer_us(-1000, wizchip_1ms_timer_callback, NULL, &g_timer);
 }
 
-time_t millis(void)
+bool wizchip_1ms_timer_callback(struct repeating_timer *t)
 {
-    return g_devtime_msec;
+    callback_ptr();
+}
+
+void wizchip_delay_ms (uint32_t ms)
+{
+  sleep_ms(ms);
 }

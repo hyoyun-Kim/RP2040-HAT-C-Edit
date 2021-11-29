@@ -19,6 +19,8 @@
 /* Use SPI DMA */
 //#define USE_SPI_DMA // if you want to use SPI DMA, uncomment.
 
+/* Clock */
+#define PLL_SYS_KHZ (133 * 1000)
 
 /**
   * ----------------------------------------------------------------------------------------------------
@@ -39,10 +41,16 @@ static void wizchip_write_burst(uint8_t *pBuf, uint16_t len);
 #endif
 static void wizchip_critical_section_lock(void);
 static void wizchip_critical_section_unlock(void);
+void wizchip_spi_initialize(void);
+void wizchip_cris_initialize(void);
+
 
 /* Network */
 void network_initialize(wiz_NetInfo net_info);
 void print_network_information(wiz_NetInfo net_info);
 
+
+/* Clock */
+void set_clock_khz(void);
 
 #endif

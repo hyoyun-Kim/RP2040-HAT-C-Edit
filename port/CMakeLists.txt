@@ -13,7 +13,8 @@ target_include_directories(SPI_FILES PUBLIC
 target_link_libraries(SPI_FILES PRIVATE
         pico_stdlib
         hardware_spi
-        hardware_dma        
+        hardware_dma
+        hardware_clocks
         )
 
 # mbedtls

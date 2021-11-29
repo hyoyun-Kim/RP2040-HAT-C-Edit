@@ -10,18 +10,15 @@
   * ----------------------------------------------------------------------------------------------------
   */
 #include <stdio.h>
-
 #include "pico/stdlib.h"
-#include "pico/binary_info.h"
-#include "pico/critical_section.h"
-#include "hardware/spi.h"
-#include "hardware/dma.h"
 
 #include "wizchip_conf.h"
+#include "w5x00_spi.h"
 
 #include "dhcp.h"
 #include "dns.h"
-#include "w5x00_spi.h"
+
+#include "timer.h"
 
 /**
   * ----------------------------------------------------------------------------------------------------
@@ -69,18 +66,8 @@ static uint8_t g_dns_target_ip[4] = {
 static uint8_t g_dns_get_ip_flag = 0;
 
 /* Timer */
-static struct repeating_timer g_timer;
 static volatile uint16_t g_msec_cnt = 0;
 
-/* Critical section */
-extern critical_section_t g_wizchip_cri_sec;
-
-#ifdef USE_SPI_DMA
-extern uint dma_tx;
-extern uint dma_rx;
-extern dma_channel_config dma_channel_config_tx;
-extern dma_channel_config dma_channel_config_rx;
-#endif
 
 /**
   * ----------------------------------------------------------------------------------------------------
@@ -93,7 +80,7 @@ static void wizchip_dhcp_assign(void);
 static void wizchip_dhcp_conflict(void);
 
 /* Timer */
-static bool repeating_timer_callback(struct repeating_timer *t);
+void repeating_timer_callback(void);
 
 /**
   * ----------------------------------------------------------------------------------------------------
@@ -108,50 +95,16 @@ int main()
     uint8_t dns_retry = 0;
 
     stdio_init_all();
-
-    // this example will use SPI0 at 5MHz
-    spi_init(SPI_PORT, 5000 * 1000);
-
-    critical_section_init(&g_wizchip_cri_sec);
-
-    gpio_set_function(PIN_SCK, GPIO_FUNC_SPI);
-    gpio_set_function(PIN_MOSI, GPIO_FUNC_SPI);
-    gpio_set_function(PIN_MISO, GPIO_FUNC_SPI);
-
-    // make the SPI pins available to picotool
-    bi_decl(bi_3pins_with_func(PIN_MISO, PIN_MOSI, PIN_SCK, GPIO_FUNC_SPI));
-
-    // chip select is active-low, so we'll initialise it to a driven-high state
-    gpio_init(PIN_CS);
-    gpio_set_dir(PIN_CS, GPIO_OUT);
-    gpio_put(PIN_CS, 1);
-
-    // make the SPI pins available to picotool
-    bi_decl(bi_1pin_with_name(PIN_CS, "W5x00 CHIP SELECT"));
-
-#ifdef USE_SPI_DMA
-    dma_tx = dma_claim_unused_channel(true);
-    dma_rx = dma_claim_unused_channel(true);
-
-    dma_channel_config_tx = dma_channel_get_default_config(dma_tx);
-    channel_config_set_transfer_data_size(&dma_channel_config_tx, DMA_SIZE_8);
-    channel_config_set_dreq(&dma_channel_config_tx, DREQ_SPI0_TX);
-
-    // We set the inbound DMA to transfer from the SPI receive FIFO to a memory buffer paced by the SPI RX FIFO DREQ
-    // We coinfigure the read address to remain unchanged for each element, but the write
-    // address to increment (so data is written throughout the buffer)
-    dma_channel_config_rx = dma_channel_get_default_config(dma_rx);
-    channel_config_set_transfer_data_size(&dma_channel_config_rx, DMA_SIZE_8);
-    channel_config_set_dreq(&dma_channel_config_rx, DREQ_SPI0_RX);
-    channel_config_set_read_increment(&dma_channel_config_rx, false);
-    channel_config_set_write_increment(&dma_channel_config_rx, true);
-#endif
-
+    
+    wizchip_spi_initialize();
+    wizchip_cris_initialize();
+    
     wizchip_reset();
     wizchip_initialize();
     wizchip_check();
+    
+    wizchip_1ms_timer_initialize(repeating_timer_callback);
 
-    add_repeating_timer_us(-1000, repeating_timer_callback, NULL, &g_timer);
 
     if (g_net_info.dhcp == NETINFO_DHCP) // DHCP
     {
@@ -205,7 +158,7 @@ int main()
                     ;
             }
 
-            sleep_ms(1000); // wait for 1 second
+            wizchip_delay_ms(1000); // wait for 1 second
         }
 
         /* Get IP through DNS */
@@ -241,7 +194,7 @@ int main()
                         ;
                 }
 
-                sleep_ms(1000); // wait for 1 second
+                wizchip_delay_ms(1000); // wait for 1 second
             }
         }
     }
@@ -288,7 +241,7 @@ static void wizchip_dhcp_conflict(void)
 }
 
 /* Timer */
-static bool repeating_timer_callback(struct repeating_timer *t)
+void repeating_timer_callback(void)
 {
     g_msec_cnt++;
 
@@ -297,6 +250,6 @@ static bool repeating_timer_callback(struct repeating_timer *t)
         g_msec_cnt = 0;
 
         DHCP_time_handler();
-        DNS_time_handler();
+        DNS_time_handler();        
     }
 }

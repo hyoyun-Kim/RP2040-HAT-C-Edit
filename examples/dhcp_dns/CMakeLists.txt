@@ -10,6 +10,7 @@ target_link_libraries(w5x00_dhcp_dns PRIVATE
         DHCP_FILES
         DNS_FILES
         SPI_FILES
+        TIMER_FILES
         )
 
 pico_enable_stdio_usb(w5x00_dhcp_dns 1)

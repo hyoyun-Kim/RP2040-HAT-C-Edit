@@ -13,16 +13,13 @@
 #include <string.h>
 
 #include "pico/stdlib.h"
-#include "pico/binary_info.h"
-#include "pico/critical_section.h"
-#include "hardware/spi.h"
-#include "hardware/dma.h"
 
 #include "wizchip_conf.h"
+#include "w5x00_spi.h"
 
 #include "mqtt_interface.h"
 #include "MQTTClient.h"
-#include "w5x00_spi.h"
+
 
 /**
   * ----------------------------------------------------------------------------------------------------
@@ -72,20 +69,10 @@ static uint8_t g_mqtt_send_buf[ETHERNET_BUF_MAX_SIZE] = {
 static uint8_t g_mqtt_recv_buf[ETHERNET_BUF_MAX_SIZE] = {
 	0,
 };
-static uint8_t g_mqtt_broker_ip[4] = {192, 168, 1, 2};
+static uint8_t g_mqtt_broker_ip[4] = {192, 168, 11, 3};
 static Network g_mqtt_network;
 static MQTTClient g_mqtt_client;
 static MQTTPacket_connectData g_mqtt_packet_connect_data = MQTTPacket_connectData_initializer;
-
-/* Critical section */
-extern critical_section_t g_wizchip_cri_sec;
-
-#ifdef USE_SPI_DMA
-extern uint dma_tx;
-extern uint dma_rx;
-extern dma_channel_config dma_channel_config_tx;
-extern dma_channel_config dma_channel_config_rx;
-#endif
 
 /**
   * ----------------------------------------------------------------------------------------------------
@@ -107,43 +94,8 @@ int main()
 
 	stdio_init_all();
 
-	// this example will use SPI0 at 5MHz
-	spi_init(SPI_PORT, 5000 * 1000);
-
-	critical_section_init(&g_wizchip_cri_sec);
-
-	gpio_set_function(PIN_SCK, GPIO_FUNC_SPI);
-	gpio_set_function(PIN_MOSI, GPIO_FUNC_SPI);
-	gpio_set_function(PIN_MISO, GPIO_FUNC_SPI);
-
-	// make the SPI pins available to picotool
-	bi_decl(bi_3pins_with_func(PIN_MISO, PIN_MOSI, PIN_SCK, GPIO_FUNC_SPI));
-
-	// chip select is active-low, so we'll initialise it to a driven-high state
-	gpio_init(PIN_CS);
-	gpio_set_dir(PIN_CS, GPIO_OUT);
-	gpio_put(PIN_CS, 1);
-
-	// make the SPI pins available to picotool
-	bi_decl(bi_1pin_with_name(PIN_CS, "W5x00 CHIP SELECT"));
-
-#ifdef USE_SPI_DMA
-	dma_tx = dma_claim_unused_channel(true);
-	dma_rx = dma_claim_unused_channel(true);
-
-	dma_channel_config_tx = dma_channel_get_default_config(dma_tx);
-	channel_config_set_transfer_data_size(&dma_channel_config_tx, DMA_SIZE_8);
-	channel_config_set_dreq(&dma_channel_config_tx, DREQ_SPI0_TX);
-
-	// We set the inbound DMA to transfer from the SPI receive FIFO to a memory buffer paced by the SPI RX FIFO DREQ
-	// We coinfigure the read address to remain unchanged for each element, but the write
-	// address to increment (so data is written throughout the buffer)
-	dma_channel_config_rx = dma_channel_get_default_config(dma_rx);
-	channel_config_set_transfer_data_size(&dma_channel_config_rx, DMA_SIZE_8);
-	channel_config_set_dreq(&dma_channel_config_rx, DREQ_SPI0_RX);
-	channel_config_set_read_increment(&dma_channel_config_rx, false);
-	channel_config_set_write_increment(&dma_channel_config_rx, true);
-#endif
+	wizchip_spi_initialize();
+    wizchip_cris_initialize();
 
 	wizchip_reset();
 	wizchip_initialize();
