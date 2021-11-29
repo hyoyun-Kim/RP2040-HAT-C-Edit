@@ -2,8 +2,13 @@
 cmake_minimum_required(VERSION 3.12)
 
 # Pull in SDK (must be before project)
+if(NOT DEFINED PICO_SDK_PATH)
+    set(PICO_SDK_PATH ${CMAKE_SOURCE_DIR}/libraries/pico-sdk)
+    message(STATUS "PICO_SDK_PATH = ${PICO_SDK_PATH}")
+endif()
+
 include(pico_sdk_import.cmake)
-#include(rp2040_hat_c-patch.cmake)
+include(rp2040_hat_c-patch.cmake)
 
 # Set project name
 set(PROJECT_NAME RP2040-HAT-C)
