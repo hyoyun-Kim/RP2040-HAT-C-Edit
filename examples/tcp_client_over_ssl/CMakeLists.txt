@@ -9,6 +9,7 @@ target_link_libraries(w5x00_tcp_client_over_ssl PRIVATE
         ETHERNET_FILES
         SPI_FILES
         TIMER_FILES
+        SSL_FILES
         mbedcrypto
         mbedx509
         mbedtls

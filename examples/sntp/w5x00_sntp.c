@@ -10,7 +10,8 @@
   * ----------------------------------------------------------------------------------------------------
   */
 #include <stdio.h>
-#include "pico/stdlib.h"
+
+#include "port_common.h"
 
 #include "wizchip_conf.h"
 #include "w5x00_spi.h"
@@ -59,7 +60,7 @@ static uint8_t g_sntp_buf[ETHERNET_BUF_MAX_SIZE] = {
 static uint8_t g_sntp_server_ip[4] = {216, 239, 35, 0}; // time.google.com
 
 /* Timer */
-static volatile uint32_t g_msec_cnt = 0;
+extern volatile uint32_t g_msec_cnt;
 
 /**
   * ----------------------------------------------------------------------------------------------------
@@ -68,7 +69,6 @@ static volatile uint32_t g_msec_cnt = 0;
   */
 /* Timer  */
 void repeating_timer_callback(void);
-static time_t millis(void);
 
 /**
   * ----------------------------------------------------------------------------------------------------
@@ -135,12 +135,8 @@ int main()
   * Functions
   * ----------------------------------------------------------------------------------------------------
   */
+ /* Timer */
 void repeating_timer_callback(void)
 {
   g_msec_cnt++;
-}
-
-static time_t millis(void)
-{ 
-  return g_msec_cnt;
 }
