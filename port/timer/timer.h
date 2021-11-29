@@ -21,5 +21,4 @@ bool wizchip_1ms_timer_callback(struct repeating_timer *t);
 
 void wizchip_delay_ms(uint32_t ms);
 
-
 #endif

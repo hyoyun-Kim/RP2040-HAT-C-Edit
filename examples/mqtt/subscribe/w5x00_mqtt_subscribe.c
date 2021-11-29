@@ -95,7 +95,7 @@ int main()
 	stdio_init_all();
 
 	wizchip_spi_initialize();
-    wizchip_cris_initialize();
+	wizchip_cris_initialize();
 
 	wizchip_reset();
 	wizchip_initialize();
