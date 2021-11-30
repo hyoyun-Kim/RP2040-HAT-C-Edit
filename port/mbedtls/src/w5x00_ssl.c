@@ -31,7 +31,7 @@ static mbedtls_ssl_config g_conf;
 mbedtls_ssl_context g_ssl;
 
 /* Timer  */
-static volatile uint32_t g_msec_cnt;
+static volatile uint32_t g_msec_cnt = 0;
 
 /**
   * ----------------------------------------------------------------------------------------------------
