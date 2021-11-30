@@ -78,7 +78,7 @@ static MQTTClient g_mqtt_client;
 static MQTTPacket_connectData g_mqtt_packet_connect_data = MQTTPacket_connectData_initializer;
 static MQTTMessage g_mqtt_message;
 
-/* Timer  */
+/* Timer */
 static volatile uint32_t g_msec_cnt = 0;
 
 /**
