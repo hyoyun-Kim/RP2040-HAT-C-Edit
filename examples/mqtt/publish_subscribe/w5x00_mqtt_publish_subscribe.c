@@ -20,6 +20,8 @@
 #include "mqtt_interface.h"
 #include "MQTTClient.h"
 
+#include "timer.h"
+
 /**
   * ----------------------------------------------------------------------------------------------------
   * Macros
@@ -43,6 +45,8 @@
 #define MQTT_PASSWORD "0123456789"
 #define MQTT_PUBLISH_TOPIC "publish_topic"
 #define MQTT_PUBLISH_PAYLOAD "Hello, World!"
+#define MQTT_PUBLISH_PERIOD (1000 * 10) // 10 seconds
+#define MQTT_SUBSCRIBE_TOPIC "subscribe_topic"
 #define MQTT_KEEP_ALIVE 60 // 60 milliseconds
 
 /**
@@ -74,6 +78,21 @@ static MQTTClient g_mqtt_client;
 static MQTTPacket_connectData g_mqtt_packet_connect_data = MQTTPacket_connectData_initializer;
 static MQTTMessage g_mqtt_message;
 
+/* Timer  */
+static volatile uint32_t g_msec_cnt = 0;
+
+/**
+  * ----------------------------------------------------------------------------------------------------
+  * Functions
+  * ----------------------------------------------------------------------------------------------------
+  */
+/* MQTT */
+static void message_arrived(MessageData *msg_data);
+
+/* Timer  */
+static void repeating_timer_callback(void);
+static time_t millis(void);
+
 /**
   * ----------------------------------------------------------------------------------------------------
   * Main
@@ -83,6 +102,8 @@ int main()
 {
 	/* Initialize */
 	int32_t retval = 0;
+	uint32_t start_ms = 0;
+	uint32_t end_ms = 0;
 
 	stdio_init_all();
 
@@ -92,6 +113,8 @@ int main()
 	wizchip_reset();
 	wizchip_initialize();
 	wizchip_check();
+
+	wizchip_1ms_timer_initialize(repeating_timer_callback);
 
 	network_initialize(g_net_info);
 
@@ -134,24 +157,27 @@ int main()
 
 	printf(" MQTT connected\n");
 
-	/* Publish */
+	/* Configure publish message */
 	g_mqtt_message.qos = QOS0;
 	g_mqtt_message.retained = 0;
 	g_mqtt_message.dup = 0;
 	g_mqtt_message.payload = MQTT_PUBLISH_PAYLOAD;
 	g_mqtt_message.payloadlen = strlen(g_mqtt_message.payload);
 
-	retval = MQTTPublish(&g_mqtt_client, MQTT_PUBLISH_TOPIC, &g_mqtt_message);
+	/* Subscribe */
+	retval = MQTTSubscribe(&g_mqtt_client, MQTT_SUBSCRIBE_TOPIC, QOS0, message_arrived);
 
 	if (retval < 0)
 	{
-		printf(" Publish failed : %d\n", retval);
+		printf(" Subscribe failed : %d\n", retval);
 
 		while (1)
 			;
 	}
 
-	printf(" Published\n");
+	printf(" Subscribed\n");
+
+	start_ms = millis();
 
 	/* Infinite loop */
 	while (1)
@@ -163,5 +189,49 @@ int main()
 			while (1)
 				;
 		}
+
+		end_ms = millis();
+
+		if (end_ms > start_ms + MQTT_PUBLISH_PERIOD)
+		{
+			/* Publish */
+			retval = MQTTPublish(&g_mqtt_client, MQTT_PUBLISH_TOPIC, &g_mqtt_message);
+
+			if (retval < 0)
+			{
+				printf(" Publish failed : %d\n", retval);
+
+				while (1)
+					;
+			}
+
+			printf(" Published\n");
+
+			start_ms = millis();
+		}
 	}
+}
+
+/**
+  * ----------------------------------------------------------------------------------------------------
+  * Functions
+  * ----------------------------------------------------------------------------------------------------
+  */
+/* MQTT */
+static void message_arrived(MessageData *msg_data)
+{
+	MQTTMessage *message = msg_data->message;
+
+	printf("%.*s", (uint32_t)message->payloadlen, (uint8_t *)message->payload);
+}
+
+/* Timer */
+void repeating_timer_callback(void)
+{
+	g_msec_cnt++;
+}
+
+static time_t millis(void)
+{
+	return g_msec_cnt;
 }
