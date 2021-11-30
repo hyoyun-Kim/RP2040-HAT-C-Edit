@@ -68,20 +68,22 @@ Examples are available at '**RP2040-HAT-C/examples/**' directory. As of now, fol
 - [**SNTP**][link-sntp]
 - [**TCP Client over SSL**][link-tcp_client_over_ssl]
 
-Note that **ioLibrary_Driver**, **mbedtls**, **pico-sdk** are needed to run ethernet examples. 
+Note that **ioLibrary_Driver**, **mbedtls**, **pico-sdk**, **pico-extras** are needed to run ethernet examples. 
 
 1. **ioLibrary_Driver** library is applicable to WIZnet's W5x00 ethernet chip.
 
 2. **mbedtls** library supports additional algorithms and support related to TLS and SSL connections. 
 
-3. **pico-sdk** is made available by Pico to enable developers to build software applications for the Pico Platform.  
+3. **pico-sdk** is made available by Pico to enable developers to build software applications for the Pico Platform. 
+
+4. **pico-extras** has additional libraries that are not yet ready for inclusion the Pico SDK proper, or are just useful but don't necessarily belong in the Pico SDK.
 
    Libraries are located in the '**RP2040-HAT-C/libraries/**' directory.
 
 - [**ioLibrary_Driver**][link-ioLibrary_driver]
-
 - [**mbedtls**][link-mbedtls_library]
 - [**pico-sdk**][link-pico_sdk]
+- [**pico-extras**][link-pico_extras]
 
 If you want to modify the code that MCU-dependent and use a MCU other than **RP2040**, you can modify it in the **port** directory.
 
@@ -91,7 +93,7 @@ port is located in the '**RP2040-HAT-C/port/**' directory.
 - [**mbedtls**][link-mbedtls_port]
 - [**timer**][link-timer_port]
 
-The structure of this RP2040-HAT-C 2.0.0 version has changed a lot compared to the previous version. If you want to refer to the previous version, please refer to the link below.
+The structure of this **RP2040-HAT-C 2.0.0** version has changed a lot compared to the previous version. If you want to refer to the previous version, please refer to the link below.
 
 - [**RP2040-HAT-C 1.0.0 version**][link-RP2040-HAT-C_1.0.0_version]
 
@@ -171,6 +173,7 @@ Link
 [link-ioLibrary_driver]: https://github.com/Wiznet/ioLibrary_Driver
 [link-mbedtls_library]: https://github.com/ARMmbed/mbedtls
 [link-pico_sdk]: https://github.com/raspberrypi/pico-sdk
+[link-pico_extras]:https://github.com/raspberrypi/pico-extras
 [link-ioLibrary_driver_port]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/tree/main/port/ioLibrary_Driver
 [link-mbedtls_port]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/tree/main/port/mbedtls/inc
 [link-timer_port]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/tree/main/port/timer
