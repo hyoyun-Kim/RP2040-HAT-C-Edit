@@ -20,7 +20,6 @@
 #include "mqtt_interface.h"
 #include "MQTTClient.h"
 
-
 /**
   * ----------------------------------------------------------------------------------------------------
   * Macros
@@ -45,7 +44,6 @@
 #define MQTT_SUBSCRIBE_TOPIC "subscribe_topic"
 #define MQTT_KEEP_ALIVE 60 // 60 milliseconds
 
-
 /**
   * ----------------------------------------------------------------------------------------------------
   * Variables
@@ -53,13 +51,13 @@
   */
 /* Network */
 static wiz_NetInfo g_net_info =
-    {
-        .mac = {0x00, 0x08, 0xDC, 0x12, 0x34, 0x56}, // MAC address
-        .ip = {192, 168, 11, 2},                     // IP address
-        .sn = {255, 255, 255, 0},                    // Subnet Mask
-        .gw = {192, 168, 11, 1},                     // Gateway
-        .dns = {8, 8, 8, 8},                         // DNS server
-        .dhcp = NETINFO_STATIC                       // DHCP enable/disable
+	{
+		.mac = {0x00, 0x08, 0xDC, 0x12, 0x34, 0x56}, // MAC address
+		.ip = {192, 168, 11, 2},					 // IP address
+		.sn = {255, 255, 255, 0},					 // Subnet Mask
+		.gw = {192, 168, 11, 1},					 // Gateway
+		.dns = {8, 8, 8, 8},						 // DNS server
+		.dhcp = NETINFO_STATIC						 // DHCP enable/disable
 };
 
 /* MQTT */
