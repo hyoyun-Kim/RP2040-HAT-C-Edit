@@ -25,20 +25,22 @@ pico_sdk_init()
 # Set the project root directory if it's not already defined, as may happen if
 # the tests folder is included directly by a parent project, without including
 # the top level CMakeLists.txt.
-
-if(NOT DEFINED MBEDTLS_LIB_DIR)
-    set(MBEDTLS_LIB_DIR ${CMAKE_SOURCE_DIR}/libraries/mbedtls)
-    message(STATUS "MBEDTLS_LIB_DIR = ${MBEDTLS_LIB_DIR}")
-endif()
-if(NOT DEFINED PORT_DIR)
-    set(PORT_DIR ${CMAKE_SOURCE_DIR}/port)
-    message(STATUS "PORT_DIR = ${PORT_DIR}")
-endif()
 if(NOT DEFINED WIZNET_DIR)
     set(WIZNET_DIR ${CMAKE_SOURCE_DIR}/libraries/ioLibrary_Driver)
     message(STATUS "WIZNET_DIR = ${WIZNET_DIR}")
 endif()
 
+if(NOT DEFINED MBEDTLS_LIB_DIR)
+    set(MBEDTLS_LIB_DIR ${CMAKE_SOURCE_DIR}/libraries/mbedtls)
+    message(STATUS "MBEDTLS_LIB_DIR = ${MBEDTLS_LIB_DIR}")
+endif()
+
+if(NOT DEFINED PORT_DIR)
+    set(PORT_DIR ${CMAKE_SOURCE_DIR}/port)
+    message(STATUS "PORT_DIR = ${PORT_DIR}")
+endif()
+
+# Turn off mbedtls test mode 
 set(ENABLE_PROGRAMS OFF CACHE BOOL "Build mbedtls programs")
 set(ENABLE_TESTING OFF CACHE BOOL "Build mbedtls testing")
 add_definitions(-DMBEDTLS_CONFIG_FILE="${PORT_DIR}/mbedtls/inc/ssl_config.h")

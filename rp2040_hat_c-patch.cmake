@@ -21,13 +21,6 @@ if(EXISTS "${IOLIBRARY_DRIVER_SRC_DIR}/.git")
 	message("ioLibrary_Driver cleaned")
 endif()
 
-if(EXISTS "${MBEDTLS_SRC_DIR}/.git")
-	message("cleaning mbedtls...")
-	execute_process(COMMAND ${GIT_EXECUTABLE} -C ${MBEDTLS_SRC_DIR} clean -fdx)
-	execute_process(COMMAND ${GIT_EXECUTABLE} -C ${MBEDTLS_SRC_DIR} reset --hard)
-	message("mbedtls cleaned")
-endif()
-
 execute_process(COMMAND ${GIT_EXECUTABLE} -C ${RP2040_HAT_C_SRC_DIR} submodule update --init)
 
 # ioLibrary_Driver patch
