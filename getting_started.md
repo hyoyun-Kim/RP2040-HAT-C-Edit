@@ -174,5 +174,5 @@ Link
 [link-ioLibrary_driver_port]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/tree/main/port/ioLibrary_Driver
 [link-mbedtls_port]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/tree/main/port/mbedtls/inc
 [link-timer_port]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/tree/main/port/timer
-[link-RP2040-HAT-C_1.0.0_version]: https://github.com/Wiznet/RP2040-HAT-C
+[link-RP2040-HAT-C_1.0.0_version]: https://github.com/Wiznet/RP2040-HAT-C/releases/tag/v1.0.0
 
