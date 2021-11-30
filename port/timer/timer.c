@@ -17,9 +17,7 @@
   */
 static struct repeating_timer g_timer;
 
-/* Timer  */
-volatile uint32_t g_msec_cnt = 0;
-
+/* Timer */
 void (*callback_ptr)(void);
 
 /**
@@ -40,7 +38,6 @@ bool wizchip_1ms_timer_callback(struct repeating_timer *t)
   {
     callback_ptr();
   }
-   
 }
 
 /* Delay */

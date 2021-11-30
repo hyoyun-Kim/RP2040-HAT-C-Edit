@@ -30,6 +30,8 @@ static mbedtls_ctr_drbg_context g_ctr_drbg;
 static mbedtls_ssl_config g_conf;
 mbedtls_ssl_context g_ssl;
 
+/* Timer  */
+static volatile uint32_t g_msec_cnt;
 
 /**
   * ----------------------------------------------------------------------------------------------------
@@ -105,4 +107,15 @@ int recv_timeout(void *ctx, unsigned char *buf, size_t len, uint32_t timeout)
     } while ((millis() - start_ms) < timeout);
 
     return MBEDTLS_ERR_SSL_TIMEOUT;
+}
+
+/* Timer */
+void repeating_timer_callback(void)
+{
+  g_msec_cnt++;
+}
+
+time_t millis(void)
+{
+    return g_msec_cnt;
 }

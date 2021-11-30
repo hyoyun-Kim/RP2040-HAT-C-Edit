@@ -60,7 +60,7 @@ static uint8_t g_sntp_buf[ETHERNET_BUF_MAX_SIZE] = {
 static uint8_t g_sntp_server_ip[4] = {216, 239, 35, 0}; // time.google.com
 
 /* Timer */
-extern volatile uint32_t g_msec_cnt;
+static volatile uint32_t g_msec_cnt = 0;
 
 /**
   * ----------------------------------------------------------------------------------------------------
