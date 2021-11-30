@@ -83,13 +83,17 @@ Note that **ioLibrary_Driver**, **mbedtls**, **pico-sdk** are needed to run ethe
 - [**mbedtls**][link-mbedtls_library]
 - [**pico-sdk**][link-pico_sdk]
 
-If you want to modify the code that MCU-dependent and use a MUC other than **Pico**, you can modify it in the **port** directory.
+If you want to modify the code that MCU-dependent and use a MCU other than **RP2040**, you can modify it in the **port** directory.
 
 port is located in the '**RP2040-HAT-C/port/**' directory.
 
 - [**ioLibrary_Driver**][link-ioLibrary_driver_port]
 - [**mbedtls**][link-mbedtls_port]
 - [**timer**][link-timer_port]
+
+The structure of this RP2040-HAT-C 2.0.0 version has changed a lot compared to the previous version. If you want to refer to the previous version, please refer to the link below.
+
+- [**RP2040-HAT-C 1.0.0 version**][link-RP2040-HAT-C_1.0.0_version]
 
 <a name="Ethernet_example_testing"></a>
 
@@ -132,20 +136,6 @@ git apply ../../patches/01_ethernet_chip.patch
 git apply ../../patches/02_ftp_client.patch
 ```
 
-- mbedtls
-
-```cpp
-/* Change directory */
-// change to the 'mbedtls' library directory
-cd [user path]/RP2040-HAT-C/libraries/mbedtls
-
-// e.g.
-cd D:/RP2040/RP2040-HAT-C/libraries/mbedtls
-
-/* Patch */
-git apply --ignore-whitespace ../../patches/03_mbedtls_test_mode.patch
-```
-
 3. Test
 
 Please refer to 'README.md' in each example directory to find detail guide for testing ethernet examples.
@@ -184,3 +174,5 @@ Link
 [link-ioLibrary_driver_port]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/tree/main/port/ioLibrary_Driver
 [link-mbedtls_port]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/tree/main/port/mbedtls/inc
 [link-timer_port]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/tree/main/port/timer
+[link-RP2040-HAT-C_1.0.0_version]: https://github.com/Wiznet/RP2040-HAT-C
+
