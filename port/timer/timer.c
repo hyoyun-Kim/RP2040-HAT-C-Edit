@@ -15,9 +15,8 @@
   * Variables
   * ----------------------------------------------------------------------------------------------------
   */
-static struct repeating_timer g_timer;
-
 /* Timer */
+static struct repeating_timer g_timer;
 void (*callback_ptr)(void);
 
 /**
