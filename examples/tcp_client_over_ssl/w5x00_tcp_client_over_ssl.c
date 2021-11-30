@@ -71,7 +71,7 @@ extern volatile uint32_t g_msec_cnt;
   */
 /* Timer  */
 void repeating_timer_callback(void);
-
+static time_t millis(void);
 
 /**
   * ----------------------------------------------------------------------------------------------------
@@ -214,4 +214,9 @@ int main()
 void repeating_timer_callback(void)
 {
   g_msec_cnt++;
+}
+
+static time_t millis(void)
+{
+    return g_msec_cnt;
 }

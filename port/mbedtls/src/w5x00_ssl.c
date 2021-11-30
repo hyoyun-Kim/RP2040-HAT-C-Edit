@@ -96,8 +96,9 @@ int recv_timeout(void *ctx, unsigned char *buf, size_t len, uint32_t timeout)
     uint16_t rcv_len;
 
     do
-    {        
-        if(getsockopt((uint8_t)ctx, SO_RECVBUF, &rcv_len))
+    {
+        getsockopt((uint8_t)ctx, SO_RECVBUF, &rcv_len);
+        if(rcv_len > 0)
         {
             return recv((uint8_t)ctx, (uint8_t *)buf, (uint16_t)len);
         }

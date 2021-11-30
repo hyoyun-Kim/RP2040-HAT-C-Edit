@@ -36,12 +36,11 @@ void wizchip_1ms_timer_initialize(void (*callback)(void))
 
 bool wizchip_1ms_timer_callback(struct repeating_timer *t)
 {
+  if(callback_ptr != NULL)
+  {
     callback_ptr();
-}
-
-time_t millis(void)
-{
-    return g_msec_cnt;
+  }
+   
 }
 
 /* Delay */
