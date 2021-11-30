@@ -68,13 +68,31 @@ Examples are available at '**RP2040-HAT-C/examples/**' directory. As of now, fol
 - [**SNTP**][link-sntp]
 - [**TCP Client over SSL**][link-tcp_client_over_ssl]
 
-Note that **ioLibrary_Driver** is needed to run ethernet examples. This library is applicable to WIZnet's W5x00 ethernet chip and is located in the '**RP2040-HAT-C/libraries/**' directory.
+Note that **ioLibrary_Driver**, **mbedtls**, **pico-sdk** are needed to run ethernet examples. 
+
+1. **ioLibrary_Driver** library is applicable to WIZnet's W5x00 ethernet chip.
+
+2. **mbedtls** library supports additional algorithms and support related to TLS and SSL connections. 
+
+3. **pico-sdk** is made available by Pico to enable developers to build software applications for the Pico Platform.  
+
+   Libraries are located in the '**RP2040-HAT-C/libraries/**' directory.
 
 - [**ioLibrary_Driver**][link-ioLibrary_driver]
 
+- [**mbedtls**][link-mbedtls_library]
+- [**pico-sdk**][link-pico_sdk]
 
+If you want to modify the code that MCU-dependent and use a MUC other than **Pico**, you can modify it in the **port** directory.
+
+port is located in the '**RP2040-HAT-C/port/**' directory.
+
+- [**ioLibrary_Driver**][link-ioLibrary_driver_port]
+- [**mbedtls**][link-mbedtls_port]
+- [**timer**][link-timer_port]
 
 <a name="Ethernet_example_testing"></a>
+
 ## Ethernet example testing
 
 1. Download
@@ -161,3 +179,8 @@ Link
 [link-sntp]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/tree/main/examples/sntp
 [link-tcp_client_over_ssl]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/tree/main/examples/tcp_client_over_ssl
 [link-ioLibrary_driver]: https://github.com/Wiznet/ioLibrary_Driver
+[link-mbedtls_library]: https://github.com/ARMmbed/mbedtls
+[link-pico_sdk]: https://github.com/raspberrypi/pico-sdk
+[link-ioLibrary_driver_port]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/tree/main/port/ioLibrary_Driver
+[link-mbedtls_port]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/tree/main/port/mbedtls/inc
+[link-timer_port]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/tree/main/port/timer
