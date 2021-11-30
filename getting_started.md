@@ -182,5 +182,5 @@ Link
 [link-mbedtls_library]: https://github.com/ARMmbed/mbedtls
 [link-pico_sdk]: https://github.com/raspberrypi/pico-sdk
 [link-ioLibrary_driver_port]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/tree/main/port/ioLibrary_Driver
-[link-mbedtls_library]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/tree/main/port/mbedtls/inc
+[link-mbedtls_port]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/tree/main/port/mbedtls/inc
 [link-timer_port]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/tree/main/port/timer
