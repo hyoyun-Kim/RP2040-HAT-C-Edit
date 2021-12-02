@@ -7,9 +7,10 @@ These sections will guide you through a series of steps from configuring develop
 - [**Ethernet example structure**](#ethernet_example_structure)
 - [**Ethernet example testing**](#ethernet_example_testing)
 
-- [**How to use port directory**](#How to use port directory) 
+- [**How to use port directory**](#how to use port directory) 
 
-<a name="development_environment_configuration"></a>
+<a name="development_environment_configuration"></a> 
+
 ## Development environment configuration
 
 To test the ethernet examples, the development environment must be configured to use Raspberry Pi Pico.
