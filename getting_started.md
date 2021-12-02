@@ -7,7 +7,7 @@ These sections will guide you through a series of steps from configuring develop
 - [**Ethernet example structure**](#ethernet_example_structure)
 - [**Ethernet example testing**](#ethernet_example_testing)
 
-
+- [**How to use port directory**](#How to use port directory) 
 
 <a name="development_environment_configuration"></a>
 ## Development environment configuration
@@ -19,14 +19,6 @@ The ethernet examples were tested by configuring the development environment for
 - [**Getting started with Raspberry Pi Pico**][link-getting_started_with_raspberry_pi_pico]
 
 **Visual Studio Code** was used during development and testing of ethernet examples, the guide document in each directory was prepared also base on development with Visual Studio Code. Please refer to corresponding document.
-
-- **Add Cmake Configure Environment Value**
-
-1. Open Cmake Tools Extension Settings
-2. Add Cmake: Configure Environment Item as PICO_SDK_PATH
-3. ADD Cmake: Configure Environment Valuse as 'D:/RP2040/RP2040-HAT-C/libraries/pico-sdk'
-
-![][link-cmake_configure]
 
 
 
@@ -93,7 +85,7 @@ port is located in the '**RP2040-HAT-C/port/**' directory.
 - [**mbedtls**][link-mbedtls_port]
 - [**timer**][link-timer_port]
 
-The structure of this RP2040-HAT-C 2.0.0 version has changed a lot compared to the previous version. If you want to refer to the previous version, please refer to the link below.
+The structure of this **RP2040-HAT-C 2.0.0** version has changed a lot compared to the previous version. If you want to refer to the previous version, please refer to the link below.
 
 - [**RP2040-HAT-C 1.0.0 version**][link-RP2040-HAT-C_1.0.0_version]
 
@@ -144,38 +136,92 @@ Please refer to 'README.md' in each example directory to find detail guide for t
 
 
 
+## How to use port directory
+
+- We moved the MCU dependent code to the port directory. The tree of port is shown below. 
+
+```
+ 
+  RP2040-HAT-C  
+  ┣ port
+     ┣ ioLibrary_Driver
+     ┃ ┣ w5x00_spi.c
+     ┃ ┗ w5x00_spi.h
+     ┣ mbedtls
+     ┃ ┗ inc
+     ┃ ┃ ┗ ssl_config.h
+     ┣ timer
+     ┃ ┣ timer.c
+     ┃ ┗ timer.h
+     ┣ CMakeLists.txt
+     ┣ port_common.h
+     ┗ version.h
+```
+
+- **ioLibrary_Driver**
+
+  If you want to change things related to SPI, such as the SPI port number and SPI read/write function, or use a different MCU without using the RP2040, you need to change the code in the 'RP2040-HAT-C/port/ioLibrary_Driver/' directory.
+
+- **timer**
+
+  This version is a structure that registers a callback function in the **wizchip_1ms_timer_initialize** function. So, you can modify the code to be executed in the **repeating_timer_callback** function in the main. 
+  Such as here is a example code in the 'RP2040-HAC-C/examples/dhcp_dns/w5x00_dhcp_dns.c'.
+  
+  ```
+  /* Initialize */
+  wizchip_1ms_timer_initialize(repeating_timer_callback);
+  
+  /* Timer */
+  void repeating_timer_callback(void)
+  {
+      g_msec_cnt++;
+  
+      if (g_msec_cnt >= 1000 - 1)
+      {
+          g_msec_cnt = 0;
+  
+          DHCP_time_handler();
+          DNS_time_handler();        
+      }
+  }
+  ```
+  
+  Also, If you use a different MCU without using the RP2040, you need to change the **wizchip_1ms_timer_initialize** function in the 'RP2040-HAT-C/port/timer/timer.c' directory.
+
+
+
 <!--
 Link
 -->
 
-[link-cmake_configure]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/main/static/images/getting_started/cmake_configure.png
+[link-cmake_configure]: https://github.com/Wiznet/RP2040-HAT-C/blob/main/static/images/getting_started/cmake_configure.png
 [link-getting_started_with_raspberry_pi_pico]: https://datasheets.raspberrypi.org/pico/getting-started-with-pico.pdf
 [link-w5100s]: https://docs.wiznet.io/Product/iEthernet/W5100S/overview
 [link-rp2040]: https://www.raspberrypi.org/products/rp2040/
 [link-raspberry_pi_pico]: https://www.raspberrypi.org/products/raspberry-pi-pico/
-[link-raspberry_pi_pico_main]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/main/static/images/getting_started/raspberry_pi_pico_main.png
+[link-raspberry_pi_pico_main]: https://github.com/Wiznet/RP2040-HAT-C/blob/main/static/images/getting_started/raspberry_pi_pico_main.png
 [link-wiznet_ethernet_hat]: https://docs.wiznet.io/Product/Open-Source-Hardware/wiznet_ethernet_hat
-[link-wiznet_ethernet_hat_main]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/main/static/images/getting_started/wiznet_ethernet_hat_main.png
+[link-wiznet_ethernet_hat_main]: https://github.com/Wiznet/RP2040-HAT-C/blob/main/static/images/getting_started/wiznet_ethernet_hat_main.png
 [link-w5100s-evb-pico]: https://docs.wiznet.io/Product/iEthernet/W5100S/w5100s-evb-pico
-[link-w5100s-evb-pico_main]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/main/static/images/getting_started/w5100s-evb-pico_main.png
-[link-dhcp_dns]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/tree/main/examples/dhcp_dns
-[link-ftp]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/tree/main/examples/ftp
-[link-ftp_client]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/tree/main/examples/ftp/client
-[link-ftp_server]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/tree/main/examples/ftp/server
-[link-http]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/tree/main/examples/http
-[link-http_server]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/tree/main/examples/http/server
-[link-loopback]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/tree/main/examples/loopback
-[link-mqtt]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/tree/main/examples/mqtt
-[link-mqtt_publish]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/tree/main/examples/mqtt/publish
-[link-mqtt_subscribe]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/tree/main/examples/mqtt/subscribe
-[link-sntp]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/tree/main/examples/sntp
-[link-tcp_client_over_ssl]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/tree/main/examples/tcp_client_over_ssl
+[link-w5100s-evb-pico_main]: https://github.com/Wiznet/RP2040-HAT-C/blob/main/static/images/getting_started/w5100s-evb-pico_main.png
+[link-dhcp_dns]: https://github.com/Wiznet/RP2040-HAT-C/tree/main/examples/dhcp_dns
+[link-ftp]: https://github.com/Wiznet/RP2040-HAT-C/tree/main/examples/ftp
+[link-ftp_client]: https://github.com/Wiznet/RP2040-HAT-C/tree/main/examples/ftp/client
+[link-ftp_server]: https://github.com/Wiznet/RP2040-HAT-C/tree/main/examples/ftp/server
+[link-http]: https://github.com/Wiznet/RP2040-HAT-C/tree/main/examples/http
+[link-http_server]: https://github.com/Wiznet/RP2040-HAT-C/tree/main/examples/http/server
+[link-loopback]: https://github.com/Wiznet/RP2040-HAT-C/tree/main/examples/loopback
+[link-mqtt]: https://github.com/Wiznet/RP2040-HAT-C/tree/main/examples/mqtt
+[link-mqtt_publish]: https://github.com/Wiznet/RP2040-HAT-C/tree/main/examples/mqtt/publish
+[link-mqtt_subscribe]: https://github.com/Wiznet/RP2040-HAT-C/tree/main/examples/mqtt/subscribe
+[link-sntp]: https://github.com/Wiznet/RP2040-HAT-C/tree/main/examples/sntp
+[link-tcp_client_over_ssl]: https://github.com/Wiznet/RP2040-HAT-C/tree/main/examples/tcp_client_over_ssl
 [link-ioLibrary_driver]: https://github.com/Wiznet/ioLibrary_Driver
 [link-mbedtls_library]: https://github.com/ARMmbed/mbedtls
 [link-pico_sdk]: https://github.com/raspberrypi/pico-sdk
 [link-pico_extras]:https://github.com/raspberrypi/pico-extras
-[link-ioLibrary_driver_port]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/tree/main/port/ioLibrary_Driver
-[link-mbedtls_port]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/tree/main/port/mbedtls/inc
-[link-timer_port]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/tree/main/port/timer
+[link-ioLibrary_driver_port]: https://github.com/Wiznet/RP2040-HAT-C/tree/main/port/ioLibrary_Driver
+[link-mbedtls_port]: https://github.com/Wiznet/RP2040-HAT-C/tree/main/port/mbedtls/inc
+[link-timer_port]: https://github.com/Wiznet/RP2040-HAT-C/tree/main/port/timer
 [link-RP2040-HAT-C_1.0.0_version]: https://github.com/Wiznet/RP2040-HAT-C/tree/3e60654e71f9afdd586c3368f8994dc03c6274e4
 
