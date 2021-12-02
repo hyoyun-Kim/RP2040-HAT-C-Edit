@@ -144,6 +144,59 @@ Please refer to 'README.md' in each example directory to find detail guide for t
 
 
 
+## How to use port directory
+
+- We moved the MCU dependent code to the port directory. The tree of port is shown below. 
+
+```
+ 
+  RP2040-HAT-C  
+  ┣ port
+     ┣ ioLibrary_Driver
+     ┃ ┣ w5x00_spi.c
+     ┃ ┗ w5x00_spi.h
+     ┣ mbedtls
+     ┃ ┗ inc
+     ┃ ┃ ┗ ssl_config.h
+     ┣ timer
+     ┃ ┣ timer.c
+     ┃ ┗ timer.h
+     ┣ CMakeLists.txt
+     ┣ port_common.h
+     ┗ version.h
+```
+
+- **ioLibrary_Driver**
+
+  If you want to change things related to SPI, such as the SPI port number and SPI read/write function, or use a different MCU without using the RP2040, you need to change the code in the 'RP2040-HAT-C/port/ioLibrary_Driver/' directory.
+
+- **timer**
+
+  This version is a structure that registers a callback function in the **wizchip_1ms_timer_initialize** function. So, you can modify the code to be executed in the **repeating_timer_callback** function in the main. Such as here is a example code in the 'RP2040-HAC-C/examples/dhcp_dns/w5x00_dhcp_dns.c'.
+
+  ```
+  /* Initialize */
+  wizchip_1ms_timer_initialize(repeating_timer_callback);
+  
+  /* Timer */
+  void repeating_timer_callback(void)
+  {
+      g_msec_cnt++;
+  
+      if (g_msec_cnt >= 1000 - 1)
+      {
+          g_msec_cnt = 0;
+  
+          DHCP_time_handler();
+          DNS_time_handler();        
+      }
+  }
+  ```
+
+  Also, If you use a different MCU without using the RP2040, you need to change the **wizchip_1ms_timer_initialize** function in the 'RP2040-HAT-C/port/timer/timer.c' directory.
+
+
+
 <!--
 Link
 -->

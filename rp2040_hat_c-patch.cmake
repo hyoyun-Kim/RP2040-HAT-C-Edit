@@ -11,6 +11,7 @@ endif()
 message("RP2040-HAT-C patch utils found")
 
 set(RP2040_HAT_C_SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
+set(RP2040_HAT_C_SRC_DIR_USB "${CMAKE_CURRENT_SOURCE_DIR}/libraries/pico-sdk")
 set(IOLIBRARY_DRIVER_SRC_DIR "${RP2040_HAT_C_SRC_DIR}/libraries/ioLibrary_Driver")
 set(RP2040_HAT_C_PATCH_DIR "${RP2040_HAT_C_SRC_DIR}/patches")
 
@@ -21,7 +22,10 @@ if(EXISTS "${IOLIBRARY_DRIVER_SRC_DIR}/.git")
 	message("ioLibrary_Driver cleaned")
 endif()
 
+# pico-sdk
 execute_process(COMMAND ${GIT_EXECUTABLE} -C ${RP2040_HAT_C_SRC_DIR} submodule update --init)
+# pico-tiny-usb
+execute_process(COMMAND ${GIT_EXECUTABLE} -C ${RP2040_HAT_C_SRC_DIR_USB} submodule update --init)
 
 # ioLibrary_Driver patch
 message("submodules ioLibrary_Driver initialised")
