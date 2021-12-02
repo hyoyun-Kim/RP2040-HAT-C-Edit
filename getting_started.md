@@ -188,6 +188,17 @@ Please refer to 'README.md' in each example directory to find detail guide for t
   ```
   
   Also, If you use a different MCU without using the RP2040, you need to change the **wizchip_1ms_timer_initialize** function in the 'RP2040-HAT-C/port/timer/timer.c' directory.
+  
+  ```
+  /* Timer */
+  void wizchip_1ms_timer_initialize(void (*callback)(void))
+  {
+    callback_ptr = callback;
+    add_repeating_timer_us(-1000, wizchip_1ms_timer_callback, NULL, &g_timer);
+  }
+  ```
+  
+  
 
 
 
