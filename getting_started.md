@@ -7,7 +7,7 @@ These sections will guide you through a series of steps from configuring develop
 - [**Ethernet example structure**](#ethernet_example_structure)
 - [**Ethernet example testing**](#ethernet_example_testing)
 
-- [**How to use port directory**](#how to use port directory) 
+- [**How to use port directory**](#how_to_use_port_directory) 
 
 <a name="development_environment_configuration"></a> 
 
@@ -135,7 +135,7 @@ git apply ../../patches/02_ftp_client.patch
 
 Please refer to 'README.md' in each example directory to find detail guide for testing ethernet examples.
 
-
+<a name="how_to_use_port_directory"></a> 
 
 ## How to use port directory
 
