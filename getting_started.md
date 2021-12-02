@@ -172,7 +172,7 @@ Please refer to 'README.md' in each example directory to find detail guide for t
 
 - **timer**
 
-  This version is a structure that registers a callback function in the **wizchip_1ms_timer_initialize** function. So, you can modify the code to be executed in the **repeating_timer_callback** function in the main. 
+  This version is a structure that registers a callback function in the **wizchip_1ms_timer_initialize** function. So, you can modify the code to be executed in the **repeating_timer_callback** function in the main.
   Such as here is a example code in the 'RP2040-HAC-C/examples/dhcp_dns/w5x00_dhcp_dns.c'.
 
   ```
