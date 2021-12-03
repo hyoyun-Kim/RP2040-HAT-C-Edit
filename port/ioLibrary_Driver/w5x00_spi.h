@@ -30,6 +30,7 @@
 /* W5x00 */
 /*! \brief W5x00 chip reset
  *  \ingroup w5x00_spi
+ * 
  * Set a GPIO pin 20 to reset pin and reset. 
  *
  * \param none
@@ -48,7 +49,8 @@ void wizchip_initialize(void);
 
 /*! \brief Check chip version
  *  \ingroup w5x00_spi
- * Check W5x00 chip version.
+ * 
+ * Get version information.
  * 
  * \param none
  */
@@ -56,6 +58,7 @@ void wizchip_check(void);
 
 /*! \brief Set CS pin
  *  \ingroup w5x00_spi
+ * 
  * Set chip select pin of spi0 to low(Active low).
  * 
  * \param none
@@ -64,6 +67,7 @@ static inline void wizchip_select(void);
 
 /*! \brief Set CS pin
  *  \ingroup w5x00_spi
+ * 
  * Set chip select pin of spi0 to high(Inactive high).
  * 
  * \param none
@@ -92,6 +96,7 @@ static void wizchip_write(uint8_t tx_data);
 #ifdef USE_SPI_DMA
 /*! \brief Configure all DMA parameters and optionally start transfer
  *  \ingroup w5x00_spi
+ * 
  * Configure all DMA parameters and read from DMA  
  * 
  * \param pBuf Buffer of data to read
@@ -101,6 +106,7 @@ static void wizchip_read_burst(uint8_t *pBuf, uint16_t len);
 
 /*! \brief Configure all DMA parameters and optionally start transfer
  *  \ingroup w5x00_spi
+ * 
  * Configure all DMA parameters and write to DMA
  * 
  * \param pBuf Buffer of data to write
@@ -151,8 +157,8 @@ void wizchip_cris_initialize(void);
 /* Network */
 /*! \brief Initialize network
  *  \ingroup w5x00_spi
- * Set network information.
  * 
+ * Set network information.
  * 
  * \param net_info network information.
  */
@@ -160,6 +166,7 @@ void network_initialize(wiz_NetInfo net_info);
 
 /*! \brief Print network information
  *  \ingroup w5x00_spi
+ * 
  * Print network information about MAC address, IP address, Subnet mask, Gateway, DHCP and DNS address.
  * 
  * \param net_info network information.
