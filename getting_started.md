@@ -323,7 +323,7 @@ Please refer to 'README.md' in each example directory to find detail guide for t
 - **timer**
 
   
-  If you want to change things related to **timer** or use a different MCU without using the RP2040, you need to change the code in the 'RP2040-HAT-C/port/timer/' directory. Here is information about functions.
+  If you want to change things related to the **timer**. Also, if you use a different MCU without using the RP2040, you need to change the code in the 'RP2040-HAT-C/port/timer/' directory. Here is information about functions.
   
   ```
   /* Timer */
