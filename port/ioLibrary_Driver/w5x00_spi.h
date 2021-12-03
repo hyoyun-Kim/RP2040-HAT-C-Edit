@@ -31,7 +31,7 @@
 /*! \brief W5x00 chip reset
  *  \ingroup w5x00_spi
  * 
- * Set a GPIO pin 20 to reset pin and reset. 
+ * Set a reset pin and reset.
  *
  * \param none
  */
