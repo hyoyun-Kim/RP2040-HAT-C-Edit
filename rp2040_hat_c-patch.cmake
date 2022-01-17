@@ -39,8 +39,8 @@ endif()
 # Delete untracked files in pico-extras
 if(EXISTS "${PICO_EXTRAS_SRC_DIR}/.git")
 	message("cleaning pico-extras...")
-	execute_process(COMMAND ${GIT_EXECUTABLE} -C ${PICO_EXTRAS_SRC_DIR} clean -fdx)
-	execute_process(COMMAND ${GIT_EXECUTABLE} -C ${PICO_EXTRAS_SRC_DIR} reset --hard)
+	#execute_process(COMMAND ${GIT_EXECUTABLE} -C ${PICO_EXTRAS_SRC_DIR} clean -fdx)
+	#execute_process(COMMAND ${GIT_EXECUTABLE} -C ${PICO_EXTRAS_SRC_DIR} reset --hard)
 	message("pico-extras cleaned")
 endif()
 
@@ -67,8 +67,8 @@ execute_process(COMMAND ${GIT_EXECUTABLE} -C ${PICO_SDK_SRC_DIR} submodule updat
 # add 01_17 for pico-extras lwip
 if(EXISTS "${PICO_EXTRAS_LWIP_DIR}/.git")
 	message("cleaning pico-extras lwip...")
-	execute_process(COMMAND ${GIT_EXECUTABLE} -C ${PICO_EXTRAS_LWIP_DIR} clean -fdx)
-	execute_process(COMMAND ${GIT_EXECUTABLE} -C ${PICO_EXTRAS_LWIP_DIR} reset --hard)
+	#execute_process(COMMAND ${GIT_EXECUTABLE} -C ${PICO_EXTRAS_LWIP_DIR} clean -fdx)
+	#execute_process(COMMAND ${GIT_EXECUTABLE} -C ${PICO_EXTRAS_LWIP_DIR} reset --hard)
 	message("pico-extras lwip cleaned")
 endif()
 
