@@ -39,8 +39,8 @@ endif()
 # Delete untracked files in pico-extras
 if(EXISTS "${PICO_EXTRAS_SRC_DIR}/.git")
 	message("cleaning pico-extras...")
-	#execute_process(COMMAND ${GIT_EXECUTABLE} -C ${PICO_EXTRAS_SRC_DIR} clean -fdx)
-	#execute_process(COMMAND ${GIT_EXECUTABLE} -C ${PICO_EXTRAS_SRC_DIR} reset --hard)
+	execute_process(COMMAND ${GIT_EXECUTABLE} -C ${PICO_EXTRAS_SRC_DIR} clean -fdx)
+	execute_process(COMMAND ${GIT_EXECUTABLE} -C ${PICO_EXTRAS_SRC_DIR} reset --hard)
 	message("pico-extras cleaned")
 endif()
 
@@ -67,8 +67,8 @@ execute_process(COMMAND ${GIT_EXECUTABLE} -C ${PICO_SDK_SRC_DIR} submodule updat
 # add 01_17 for pico-extras lwip
 if(EXISTS "${PICO_EXTRAS_LWIP_DIR}/.git")
 	message("cleaning pico-extras lwip...")
-	#execute_process(COMMAND ${GIT_EXECUTABLE} -C ${PICO_EXTRAS_LWIP_DIR} clean -fdx)
-	#execute_process(COMMAND ${GIT_EXECUTABLE} -C ${PICO_EXTRAS_LWIP_DIR} reset --hard)
+	execute_process(COMMAND ${GIT_EXECUTABLE} -C ${PICO_EXTRAS_LWIP_DIR} clean -fdx)
+	execute_process(COMMAND ${GIT_EXECUTABLE} -C ${PICO_EXTRAS_LWIP_DIR} reset --hard)
 	message("pico-extras lwip cleaned")
 endif()
 
@@ -87,5 +87,20 @@ foreach(IOLIBRARY_DRIVER_PATCH IN LISTS IOLIBRARY_DRIVER_PATCHES)
 	execute_process(
 		COMMAND ${GIT_EXECUTABLE} apply ${IOLIBRARY_DRIVER_PATCH}
 		WORKING_DIRECTORY ${IOLIBRARY_DRIVER_SRC_DIR}
+	)
+endforeach()
+
+# pico-extras patch
+message("submodules pico-extras initialised")
+
+file(GLOB PICO_EXTRAS_PATCHES 
+	"${RP2040_HAT_C_PATCH_DIR}/0001-Edit-lwiperf-in-pico-extras.patch"	
+	)
+
+foreach(PICO_EXTRAS_PATCH IN LISTS PICO_EXTRAS_PATCHES)
+	message("Running patch ${PICO_EXTRAS_PATCH}")
+	execute_process(
+		COMMAND ${GIT_EXECUTABLE} apply --ignore-whitespace ${PICO_EXTRAS_PATCH}
+		WORKING_DIRECTORY ${PICO_EXTRAS_LWIP_DIR}
 	)
 endforeach()
