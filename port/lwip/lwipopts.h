@@ -64,7 +64,6 @@
 #define LWIP_HTTPD_SSI_INCLUDE_TAG      0
 
 #define LWIP_RNAD_WIZ()                 ((u32_t)rand())
-//#define LWIP_RNAD()                     ((u32_t)rand())
 
 #if 1
 #define LWIP_DEBUG 1
