@@ -95,7 +95,7 @@ IP4_ADDR(&addr, 192, 168, 1, 1);
 
 ![][link-see_network_information_of_raspberry_pi_pico]
 
-6. Move to iperf path.
+6. Open command prompt and move to iperf path.
 
 ![][link-move_to_iperf_path]
 
