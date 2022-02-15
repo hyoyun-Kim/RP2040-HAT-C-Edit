@@ -17,7 +17,6 @@ set(PICO_EXTRAS_SRC_DIR "${RP2040_HAT_C_SRC_DIR}/libraries/pico-extras")
 set(PICO_SDK_SRC_DIR "${RP2040_HAT_C_SRC_DIR}/libraries/pico-sdk")
 set(PICO_SDK_TINYUSB_SRC_DIR "${RP2040_HAT_C_SRC_DIR}/libraries/lib/tinyusb")
 set(RP2040_HAT_C_PATCH_DIR "${RP2040_HAT_C_SRC_DIR}/patches")
-# add lwip
 set(PICO_EXTRAS_LWIP_DIR "${RP2040_HAT_C_SRC_DIR}/libraries/pico-extras/lib/lwip")
 
 # Delete untracked files in ioLibrary_Driver
@@ -64,7 +63,7 @@ endif()
 
 execute_process(COMMAND ${GIT_EXECUTABLE} -C ${PICO_SDK_SRC_DIR} submodule update --init)
 
-# add 01_17 for pico-extras lwip
+# Delete untracked files in pico-extras lwip
 if(EXISTS "${PICO_EXTRAS_LWIP_DIR}/.git")
 	message("cleaning pico-extras lwip...")
 	execute_process(COMMAND ${GIT_EXECUTABLE} -C ${PICO_EXTRAS_LWIP_DIR} clean -fdx)
@@ -87,20 +86,5 @@ foreach(IOLIBRARY_DRIVER_PATCH IN LISTS IOLIBRARY_DRIVER_PATCHES)
 	execute_process(
 		COMMAND ${GIT_EXECUTABLE} apply ${IOLIBRARY_DRIVER_PATCH}
 		WORKING_DIRECTORY ${IOLIBRARY_DRIVER_SRC_DIR}
-	)
-endforeach()
-
-# pico-extras patch
-message("submodules pico-extras initialised")
-
-file(GLOB PICO_EXTRAS_PATCHES 
-	"${RP2040_HAT_C_PATCH_DIR}/0001-Edit-lwiperf-in-pico-extras.patch"	
-	)
-
-foreach(PICO_EXTRAS_PATCH IN LISTS PICO_EXTRAS_PATCHES)
-	message("Running patch ${PICO_EXTRAS_PATCH}")
-	execute_process(
-		COMMAND ${GIT_EXECUTABLE} apply --ignore-whitespace ${PICO_EXTRAS_PATCH}		
-		WORKING_DIRECTORY ${PICO_EXTRAS_SRC_DIR}
 	)
 endforeach()

@@ -32,8 +32,8 @@ static dma_channel_config dma_channel_config_rx;
   */
 void wizchip_spi_initialize(void)
 {
-    // this example will use SPI0 at 5MHz
-    spi_init(SPI_PORT, 5000 * 1000);
+    // this example will use SPI0 at 21MHz    
+    spi_init(SPI_PORT, 21000 * 1000);
 
     gpio_set_function(PIN_SCK, GPIO_FUNC_SPI);
     gpio_set_function(PIN_MOSI, GPIO_FUNC_SPI);
@@ -190,7 +190,7 @@ void wizchip_initialize(void)
 
     /* W5x00 initialize */
     uint8_t temp;
-    uint8_t memsize[2][4] = {{2, 2, 2, 2}, {2, 2, 2, 2}};
+    uint8_t memsize[2][4] = {{8, 0, 0, 0}, {8, 0, 0, 0}};
 
     if (ctlwizchip(CW_INIT_WIZCHIP, (void *)memsize) == -1)
     {

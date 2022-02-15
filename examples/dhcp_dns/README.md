@@ -24,7 +24,7 @@ If you are using W5100S-EVB-Pico, you can skip '1. Combine...'
 
 To test the DHCP & DNS example, minor settings shall be done in code.
 
-1. Setup SPI port and pin in 'RP2040-HAT-C/port/ioLibrary_Driver/w5x00spi.h' directory.
+1. Setup SPI port and pin in 'RP2040-HAT-C-LWIP/port/ioLibrary_Driver/w5x00spi.h' directory.
 
 Setup the SPI interface you use.
 
@@ -46,26 +46,22 @@ If you want to test with the DHCP & DNS example using SPI DMA, uncomment USE_SPI
 //#define USE_SPI_DMA // if you want to use SPI DMA, uncomment.
 ```
 
-2. Setup network configuration such as IP in 'RP2040-HAT-C/examples/dhcp_dns/w5x00_dhcp_dns.c' directory.
+2. The lwIP stack provides a basic DNS client to allow other applications to resolve host names to addresses using the DNS(Domain Name System) protocol. LWIP_DNS must be #define in lwipopts.h('RP2040-HAT-C-LWIP/port/lwip/lwipopts.h')
 
-Setup IP, other network settings to suit your network environment and whether to use DHCP.
-
-```cpp
-/* Network */
-static wiz_NetInfo g_net_info =
-    {
-        .mac = {0x00, 0x08, 0xDC, 0x12, 0x34, 0x56}, // MAC address
-        .ip = {192, 168, 11, 2},                     // IP address
-        .sn = {255, 255, 255, 0},                    // Subnet Mask
-        .gw = {192, 168, 11, 1},                     // Gateway
-        .dns = {8, 8, 8, 8},                         // DNS server
-        .dhcp = NETINFO_DHCP                         // DHCP enable/disable
-};
+```
+#define LWIP_DNS                        1
 ```
 
-3. Setup DNS configuration
+3. To use DHCP on an interface, simply use the following commands in 'RP2040-HAT-C-LWIP/examples/dhcp_dns/w5x00_dhcp_dns.c' directory.
 
-Setup the domain name that you want to get IP in 'RP2040-HAT-C/examples/dhcp_dns/w5x00_dhcp_dns.c' directory.
+```cpp
+/* Start DHCP configuration for an interface */
+dhcp_start(&g_netif);  
+```
+
+4. Setup DNS configuration.
+
+Setup the domain name that you want to get IP in 'RP2040-HAT-C-LWIP/examples/dhcp_dns/w5x00_dhcp_dns.c' directory.
 
 ```cpp
 /* DNS */
@@ -78,7 +74,7 @@ static uint8_t g_dns_target_domain[] = "www.wiznet.io";
 
 1. After completing the DHCP & DNS example configuration, click 'build' in the status bar at the bottom of Visual Studio Code or press the 'F7' button on the keyboard to build.
 
-2. When the build is completed, 'w5x00_dhcp_dns.uf2' is generated in 'RP2040-HAT-C/build/examples/dhcp_dns/' directory.
+2. When the build is completed, 'w5x00_dhcp_dns.uf2' is generated in 'RP2040-HAT-C-LWIP/build/examples/dhcp_dns/' directory.
 
 
 
@@ -107,7 +103,7 @@ Link
 -->
 
 [link-tera_term]: https://osdn.net/projects/ttssh2/releases/
-[link-raspberry_pi_pico_usb_mass_storage]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/main/static/images/dhcp_dns/raspberry_pi_pico_usb_mass_storage.png
-[link-connect_to_serial_com_port]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/main/static/images/dhcp_dns/connect_to_serial_com_port.png
-[link-see_network_information_ip_assigned_by_dhcp_of_raspberry_pi_pico_and_get_ip_through_dns]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/main/static/images/dhcp_dns/see_network_information_ip_assigned_by_dhcp_of_raspberry_pi_pico_and_get_ip_through_dns.png
+[link-raspberry_pi_pico_usb_mass_storage]: https://github.com/hyoyun-Kim/RP2040-HAT-C-LWIP/blob/main/static/images/dhcp_dns/raspberry_pi_pico_usb_mass_storage.png
+[link-connect_to_serial_com_port]: https://github.com/hyoyun-Kim/RP2040-HAT-C-LWIP/blob/main/static/images/dhcp_dns/connect_to_serial_com_port.png
+[link-see_network_information_ip_assigned_by_dhcp_of_raspberry_pi_pico_and_get_ip_through_dns]: https://github.com/hyoyun-Kim/RP2040-HAT-C-LWIP/blob/main/static/images/dhcp_dns/see_network_information_ip_assigned_by_dhcp_of_raspberry_pi_pico_and_get_ip_through_dns.png
 

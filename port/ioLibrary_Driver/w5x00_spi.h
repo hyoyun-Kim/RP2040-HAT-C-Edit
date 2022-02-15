@@ -20,7 +20,7 @@
 //#define USE_SPI_DMA // if you want to use SPI DMA, uncomment.
 
 /* Clock */
-#define PLL_SYS_KHZ (133 * 1000)
+#define PLL_SYS_KHZ (125 * 1000)
 
 /**
   * ----------------------------------------------------------------------------------------------------

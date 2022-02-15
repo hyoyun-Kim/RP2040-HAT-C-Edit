@@ -33,3 +33,18 @@ target_link_libraries(TIMER_FILES PRIVATE
         pico_stdlib      
         )
 
+add_library(W5x00_LWIP_FILES STATIC)
+
+target_sources(W5x00_LWIP_FILES PUBLIC
+        ${PORT_DIR}/lwip/w5x00_lwip.c
+)
+
+target_include_directories(W5x00_LWIP_FILES PUBLIC
+        ${WIZNET_DIR}/Ethernet
+        ${PORT_DIR}
+)
+
+target_link_libraries(W5x00_LWIP_FILES PUBLIC
+        ETHERNET_FILES
+        lwip
+)
