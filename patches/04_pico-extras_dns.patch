@@ -1,0 +1,25 @@
+From be995d13e2a67f99d2c75f11cca0d44cc5bbdbbb Mon Sep 17 00:00:00 2001
+From: hyoyun-Kim <hyo-yun1103@daum.net>
+Date: Tue, 15 Feb 2022 18:05:21 +0900
+Subject: [PATCH 1/2] Change dns_rand_txid in dns
+
+---
+ src/core/dns.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/core/dns.c b/src/core/dns.c
+index f83ea9b4..768f72ea 100644
+--- a/src/core/dns.c
++++ b/src/core/dns.c
+@@ -100,7 +100,7 @@
+ /** Random generator function to create random TXIDs and source ports for queries */
+ #ifndef DNS_RAND_TXID
+ #if ((LWIP_DNS_SECURE & LWIP_DNS_SECURE_RAND_XID) != 0)
+-#define DNS_RAND_TXID LWIP_RAND
++#define DNS_RAND_TXID LWIP_RAND_WIZ
+ #else
+ static u16_t dns_txid;
+ #define DNS_RAND_TXID() (++dns_txid)
+-- 
+2.32.0.windows.2
+

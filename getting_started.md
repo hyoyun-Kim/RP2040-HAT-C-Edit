@@ -46,32 +46,24 @@ The ethernet examples use **Raspberry Pi Pico** and **WIZnet Ethernet HAT** - et
 <a name="ethernet_example_structure"></a>
 ## Ethernet example structure
 
-Examples are available at '**RP2040-HAT-C/examples/**' directory. As of now, following examples are provided.
+Examples are available at '**RP2040-HAT-C-LWIP/examples/**' directory. As of now, following examples are provided.
 
 - [**DHCP & DNS**][link-dhcp_dns]
-- [**FTP**][link-ftp]
-	- [**Client**][link-ftp_client]
-	- [**Server**][link-ftp_server]
-- [**HTTP**][link-http]
-	- [**Server**][link-http_server]
-- [**Loopback**][link-loopback]
-- [**MQTT**][link-mqtt]
-	- [**Publish**][link-mqtt_publish]
-	- [**Subscribe**][link-mqtt_subscribe]
-- [**SNTP**][link-sntp]
-- [**TCP Client over SSL**][link-tcp_client_over_ssl]
+- [**LWIPERF**][link-lwiperf]
 
 Note that **ioLibrary_Driver**, **mbedtls**, **pico-sdk**, **pico-extras** are needed to run ethernet examples. 
 
-1. **ioLibrary_Driver** library is applicable to WIZnet's W5x00 ethernet chip.
+1. 
 
-2. **mbedtls** library supports additional algorithms and support related to TLS and SSL connections. 
+2. **ioLibrary_Driver** library is applicable to WIZnet's W5x00 ethernet chip.
 
-3. **pico-sdk** is made available by Pico to enable developers to build software applications for the Pico Platform. 
+3. **mbedtls** library supports additional algorithms and support related to TLS and SSL connections. 
 
-4. **pico-extras** has additional libraries that are not yet ready for inclusion the Pico SDK proper, or are just useful but don't necessarily belong in the Pico SDK.
+4. **pico-sdk** is made available by Pico to enable developers to build software applications for the Pico Platform. 
 
-   Libraries are located in the '**RP2040-HAT-C/libraries/**' directory.
+5. **pico-extras** has additional libraries that are not yet ready for inclusion the Pico SDK proper, or are just useful but don't necessarily belong in the Pico SDK.
+
+   Libraries are located in the '**RP2040-HAT-C-LWIP/libraries/**' directory.
 
 - [**ioLibrary_Driver**][link-ioLibrary_driver]
 - [**mbedtls**][link-mbedtls_library]
@@ -80,15 +72,12 @@ Note that **ioLibrary_Driver**, **mbedtls**, **pico-sdk**, **pico-extras** are n
 
 If you want to modify the code that MCU-dependent and use a MCU other than **RP2040**, you can modify it in the **port** directory.
 
-port is located in the '**RP2040-HAT-C/port/**' directory.
+port is located in the '**RP2040-HAT-C-LWIP/port/**' directory.
 
 - [**ioLibrary_Driver**][link-ioLibrary_driver_port]
+- [**lwip**][link-lwip_port]
 - [**mbedtls**][link-mbedtls_port]
 - [**timer**][link-timer_port]
-
-The structure of this **RP2040-HAT-C 2.0.0** version has changed a lot compared to the previous version. If you want to refer to the previous version, please refer to the link below.
-
-- [**RP2040-HAT-C 1.0.0 version**][link-RP2040-HAT-C_1.0.0_version]
 
 <a name="Ethernet_example_testing"></a>
 
@@ -107,7 +96,7 @@ cd [user path]
 cd D:/RP2040
 
 /* Clone */
-git clone --recurse-submodules https://github.com/Wiznet/RP2040-HAT-C.git
+git clone --recurse-submodules https://github.com/Wiznet/RP2040-HAT-C-LWIP.git
 ```
 
 With Visual Studio Code, the library set as a submodule is automatically downloaded, so it doesn't matter whether the library set as a submodule is an empty directory or not, so refer to it.
@@ -121,10 +110,10 @@ With Visual Studio Code, each library set as a submodule is automatically patche
 ```cpp
 /* Change directory */
 // change to the 'ioLibrary_Driver' library directory
-cd [user path]/RP2040-HAT-C/libraries/ioLibrary_Driver
+cd [user path]/RP2040-HAT-C-LWIP/libraries/ioLibrary_Driver
 
 // e.g.
-cd D:/RP2040/RP2040-HAT-C/libraries/ioLibrary_Driver
+cd D:/RP2040/RP2040-HAT-C-LWIP/libraries/ioLibrary_Driver
 
 /* Patch */
 git apply ../../patches/01_ethernet_chip.patch
@@ -143,11 +132,15 @@ Please refer to 'README.md' in each example directory to find detail guide for t
 
 ```
  
-  RP2040-HAT-C  
+  RP2040-HAT-C-LWIP  
   ┣ port
      ┣ ioLibrary_Driver
      ┃ ┣ w5x00_spi.c
      ┃ ┗ w5x00_spi.h
+     ┣ lwip
+     ┃ ┣ lwipopts.h
+     ┃ ┣ w5x00_lwip.c
+     ┃ ┗ w5x00_lwip.h
      ┣ mbedtls
      ┃ ┗ inc
      ┃ ┃ ┗ ssl_config.h
@@ -155,13 +148,12 @@ Please refer to 'README.md' in each example directory to find detail guide for t
      ┃ ┣ timer.c
      ┃ ┗ timer.h
      ┣ CMakeLists.txt
-     ┣ port_common.h
-     ┗ version.h
+     ┗ port_common.h
 ```
 
 - **ioLibrary_Driver**
 
-  If you want to change things related to SPI, such as the SPI port number and SPI read/write function, or use a different MCU without using the RP2040, you need to change the code in the 'RP2040-HAT-C/port/ioLibrary_Driver/' directory. Here is information about functions.
+  If you want to change things related to SPI, such as the SPI port number and SPI read/write function, or use a different MCU without using the RP2040, you need to change the code in the 'RP2040-HAT-C-LWIP/port/ioLibrary_Driver/' directory. Here is information about functions.
 
   ```
   /*! \brief W5x00 chip reset
@@ -318,12 +310,82 @@ Please refer to 'README.md' in each example directory to find detail guide for t
   void set_clock_khz(void);
   ```
 
+
+- **lwip**
+
+  If you want to change things related to lwIP, such as the Network interface(NETIF) and lwIP read/write function. You need to change the code in the 'RP2040-HAT-C-LWIP/port/lwip/' directory. Here is information about functions.
+
+  ```
+  /*! \brief callback function
+   *  \ingroup w5x00_lwip
+   * 
+   * Callback function that initializes the interface.
+   *
+   * \param netif a pre-allocated netif structure
+   * \return ERR_OK if Network interface initialized
+   */
+  err_t netif_initialize(struct netif *netif);
   
+  /*! \brief callback function
+   *  \ingroup w5x00_lwip
+   * 
+   * This function is called by ethernet_output() when it wants
+   * to send a packet on the interface. This function outputs
+   * the pbuf as-is on the link medium.
+   *
+   * \param netif a pre-allocated netif structure
+   * \param p main packet buffer struct
+   * \return ERR_OK if data was sent.
+   */
+  err_t netif_output(struct netif *netif, struct pbuf *p);
+  
+  /*! \brief send an Ethernet packet
+   *  \ingroup w5x00_lwip
+   * 
+   * It is used to send outgoing data to the socket.
+   *
+   * \param sn socket number
+   * \param buf a pointer to the data to send
+   * \param len the length of data in packet
+   * \return The sent data size
+   */
+  int32_t send_lwip(uint8_t sn, uint8_t *buf, uint16_t len);
+  
+  /*! \brief read an Ethernet packet
+   *  \ingroup w5x00_lwip
+   * 
+   * It is used to read incoming data from the socket.
+   *
+   * \param sn socket number
+   * \param buf a pointer buffer to read incoming data
+   * \param len the length of the data in the packet
+   * \return The real received data size
+   */
+  int32_t recv_lwip(uint8_t sn, uint8_t * buf, uint16_t len);
+  
+  /*! \brief callback function
+   *  \ingroup w5x00_lwip
+   * 
+   * Callback function for link.
+   *
+   * \param netif a pre-allocated netif structure 
+   */
+  void netif_link_callback(struct netif *netif);
+  
+  /*! \brief callback function
+   *  \ingroup w5x00_lwip
+   * 
+   * Callback function for status.
+   *
+   * \param netif a pre-allocated netif structure 
+   */
+  void netif_status_callback(struct netif *netif);
+  ```
 
 - **timer**
 
   
-  If you want to change things related to the **timer**. Also, if you use a different MCU without using the RP2040, you need to change the code in the 'RP2040-HAT-C/port/timer/' directory. Here is information about functions.
+  If you want to change things related to the **timer**. Also, if you use a different MCU without using the RP2040, you need to change the code in the 'RP2040-HAT-C-LWIP/port/timer/' directory. Here is information about functions.
   
   ```
   /* Timer */
@@ -375,24 +437,13 @@ Link
 [link-wiznet_ethernet_hat_main]: https://github.com/Wiznet/RP2040-HAT-C/blob/main/static/images/getting_started/wiznet_ethernet_hat_main.png
 [link-w5100s-evb-pico]: https://docs.wiznet.io/Product/iEthernet/W5100S/w5100s-evb-pico
 [link-w5100s-evb-pico_main]: https://github.com/Wiznet/RP2040-HAT-C/blob/main/static/images/getting_started/w5100s-evb-pico_main.png
-[link-dhcp_dns]: https://github.com/Wiznet/RP2040-HAT-C/tree/main/examples/dhcp_dns
-[link-ftp]: https://github.com/Wiznet/RP2040-HAT-C/tree/main/examples/ftp
-[link-ftp_client]: https://github.com/Wiznet/RP2040-HAT-C/tree/main/examples/ftp/client
-[link-ftp_server]: https://github.com/Wiznet/RP2040-HAT-C/tree/main/examples/ftp/server
-[link-http]: https://github.com/Wiznet/RP2040-HAT-C/tree/main/examples/http
-[link-http_server]: https://github.com/Wiznet/RP2040-HAT-C/tree/main/examples/http/server
-[link-loopback]: https://github.com/Wiznet/RP2040-HAT-C/tree/main/examples/loopback
-[link-mqtt]: https://github.com/Wiznet/RP2040-HAT-C/tree/main/examples/mqtt
-[link-mqtt_publish]: https://github.com/Wiznet/RP2040-HAT-C/tree/main/examples/mqtt/publish
-[link-mqtt_subscribe]: https://github.com/Wiznet/RP2040-HAT-C/tree/main/examples/mqtt/subscribe
-[link-sntp]: https://github.com/Wiznet/RP2040-HAT-C/tree/main/examples/sntp
-[link-tcp_client_over_ssl]: https://github.com/Wiznet/RP2040-HAT-C/tree/main/examples/tcp_client_over_ssl
+[link-dhcp_dns]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/tree/lwip-version/examples/dhcp_dns
+[link-lwiperf]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/tree/lwip-version/examples/lwiperf
 [link-ioLibrary_driver]: https://github.com/Wiznet/ioLibrary_Driver
 [link-mbedtls_library]: https://github.com/ARMmbed/mbedtls
 [link-pico_sdk]: https://github.com/raspberrypi/pico-sdk
 [link-pico_extras]:https://github.com/raspberrypi/pico-extras
-[link-ioLibrary_driver_port]: https://github.com/Wiznet/RP2040-HAT-C/tree/main/port/ioLibrary_Driver
-[link-mbedtls_port]: https://github.com/Wiznet/RP2040-HAT-C/tree/main/port/mbedtls/inc
-[link-timer_port]: https://github.com/Wiznet/RP2040-HAT-C/tree/main/port/timer
-[link-RP2040-HAT-C_1.0.0_version]: https://github.com/Wiznet/RP2040-HAT-C/tree/3e60654e71f9afdd586c3368f8994dc03c6274e4
-
+[link-ioLibrary_driver_port]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/tree/lwip-version/port/ioLibrary_Driver
+[link-lwip_port]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/tree/lwip-version/port/lwip
+[link-mbedtls_port]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/tree/lwip-version/port/mbedtls/inc
+[link-timer_port]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/tree/lwip-version/port/timer

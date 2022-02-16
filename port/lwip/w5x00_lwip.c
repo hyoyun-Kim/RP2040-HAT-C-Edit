@@ -29,8 +29,7 @@ err_t netif_output(struct netif *netif, struct pbuf *p)
 {
    uint send_len = 0;
 
-   send_len = send_lwip(0, p->payload, p->len);   
-   //printf("sent data length %d\n", send_len);
+   send_len = send_lwip(0, p->payload, p->len);
 
    return ERR_OK;
 }
@@ -54,9 +53,8 @@ int32_t send_lwip(uint8_t sn, uint8_t *buf, uint16_t len)
    tmp = getSn_SR(sn);
 
    freesize = getSn_TxMAX(sn);
-   if (len > freesize) len = freesize; // check size not to exceed MAX size.
+   if (len > freesize) len = freesize; // check size not to exceed MAX size.   
    
-   //printf("send function socket status %d\n", tmp);
    // while(1)
    // {
    //    freesize = getSn_TX_FSR(sn);
@@ -65,12 +63,11 @@ int32_t send_lwip(uint8_t sn, uint8_t *buf, uint16_t len)
       
    //    if(len <= freesize) break;
    // };
-   //printf("send_lwip function len %d\n", len);
+   
    wiz_send_data(sn, buf, len);
    setSn_CR(sn, Sn_CR_SEND);
-   while(getSn_CR(sn));
+   while(getSn_CR(sn));   
    
-   // add 21_11_08
    while(1)
    {
       uint8_t IRtemp = getSn_IR(sn);
@@ -93,16 +90,12 @@ int32_t send_lwip(uint8_t sn, uint8_t *buf, uint16_t len)
    return (int32_t)len;
 }
 
-
 int32_t recv_lwip(uint8_t sn, uint8_t * buf, uint16_t len)
 {  
    uint8_t head[2];
-   uint16_t pack_len = 0;
-   //uint8_t temp = 0;
+   uint16_t pack_len = 0;   
 
    pack_len = getSn_RX_RSR(sn);
-   //temp = getSn_SR(sn);
-
    
    if(pack_len > 0)
    {
@@ -129,7 +122,6 @@ int32_t recv_lwip(uint8_t sn, uint8_t * buf, uint16_t len)
    return (int32_t)pack_len;
 }
 
-// add 22-01-24
 void netif_link_callback(struct netif *netif)
 {
     printf("netif link status changed %s\n", netif_is_link_up(netif) ? "up" : "down");

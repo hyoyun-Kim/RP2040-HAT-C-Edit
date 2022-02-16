@@ -1,0 +1,25 @@
+From 7e88d7a5e7d9bf0f34ba15be19c5f8e3b2f4ea29 Mon Sep 17 00:00:00 2001
+From: hyoyun-Kim <hyo-yun1103@daum.net>
+Date: Tue, 15 Feb 2022 18:00:03 +0900
+Subject: [PATCH] Add target link lib pico_stdlib in lwip
+
+---
+ src/rp2_common/lwip/CMakeLists.txt | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/src/rp2_common/lwip/CMakeLists.txt b/src/rp2_common/lwip/CMakeLists.txt
+index 33a4ca6..d584108 100644
+--- a/src/rp2_common/lwip/CMakeLists.txt
++++ b/src/rp2_common/lwip/CMakeLists.txt
+@@ -56,4 +56,8 @@ if (EXISTS ${LWIP_PATH}/${LWIP_TEST_PATH})
+         ${LWIP_PATH}/src/include/ipv4
+         ${LWIP_PATH}/src/include/lwip/apps
+     )
++
++    target_link_libraries(lwip INTERFACE
++        pico_stdlib
++    )
+ endif()
+-- 
+2.32.0.windows.2
+

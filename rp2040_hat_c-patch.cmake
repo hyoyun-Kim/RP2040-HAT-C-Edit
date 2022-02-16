@@ -88,3 +88,34 @@ foreach(IOLIBRARY_DRIVER_PATCH IN LISTS IOLIBRARY_DRIVER_PATCHES)
 		WORKING_DIRECTORY ${IOLIBRARY_DRIVER_SRC_DIR}
 	)
 endforeach()
+
+# pico-extras patch
+message("submodules pico-extras initialised")
+
+file(GLOB PICO_EXTRAS_PATCHES 
+	"${RP2040_HAT_C_PATCH_DIR}/03_pico-extras_lwip_cmakelists.patch"
+	)
+
+foreach(PICO_EXTRAS_PATCH IN LISTS PICO_EXTRAS_PATCHES)
+	message("Running patch ${PICO_EXTRAS_PATCH}")
+	execute_process(
+		COMMAND ${GIT_EXECUTABLE} apply --ignore-whitespace ${PICO_EXTRAS_PATCH}		
+		WORKING_DIRECTORY ${PICO_EXTRAS_SRC_DIR}		
+	)
+endforeach()
+
+# pico-extras lwip patch
+message("submodules pico-extras lwip initialised")
+
+file(GLOB PICO_EXTRAS_LWIP_PATCHES 	
+	"${RP2040_HAT_C_PATCH_DIR}/04_pico-extras_dns.patch"	
+	"${RP2040_HAT_C_PATCH_DIR}/05_pico-extras_opt.patch"	
+	)
+
+foreach(PICO_EXTRAS_LWIP_PATCH IN LISTS PICO_EXTRAS_LWIP_PATCHES)
+	message("Running patch ${PICO_EXTRAS_PATCH}")
+	execute_process(
+		COMMAND ${GIT_EXECUTABLE} apply --ignore-whitespace ${PICO_EXTRAS_LWIP_PATCH}				
+		WORKING_DIRECTORY ${PICO_EXTRAS_LWIP_DIR}
+	)
+endforeach()
