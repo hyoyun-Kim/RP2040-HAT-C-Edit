@@ -112,7 +112,7 @@ Link
 [link-tera_term]: https://osdn.net/projects/ttssh2/releases/
 [link-hercules]: https://www.hw-group.com/software/hercules-setup-utility
 [link-raspberry_pi_pico_usb_mass_storage]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/lwip-version/static/images/loopback/raspberry_pi_pico_usb_mass_storage.png
-[link-connect_to_serial_com_port]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/lwip-version/static/images/loopback/connect_to_serial_com_port.png
+[link-connect_to_serial_com_port]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/lwip-version/static/images/loopback/connect_to_serial_com_port.png
 [link-see_network_information_of_raspberry_pi_pico_and_open_loopback_server]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/lwip-version/static/images/loopback/see_network_information_of_raspberry_pi_pico_and_open_loopback_server.png
 [link-connect_to_loopback_server_using_hercules_tcp_client_1]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/lwip-version/static/images/loopback/connect_to_loopback_server_using_hercules_tcp_client_1.png
 [link-receive_back_sent_message]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/blob/lwip-version/static/images/loopback/receive_back_sent_message.png
