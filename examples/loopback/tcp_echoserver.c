@@ -27,8 +27,8 @@ void tcp_echoserver_init(void)
   {
     err_t err;
     
-    /* bind echo_pcb to port 5000 (ECHO protocol) */    
-    err = tcp_bind(tcp_echoserver_pcb, &g_netif.ip_addr, PORT_LWIPERF);
+    /* bind echo_pcb to port 5001 (ECHO protocol) */    
+    err = tcp_bind(tcp_echoserver_pcb, &g_netif.ip_addr, PORT_LOOPBACK);
     
     if (err == ERR_OK)
     {

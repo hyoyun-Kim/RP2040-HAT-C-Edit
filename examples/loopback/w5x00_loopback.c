@@ -35,6 +35,9 @@
 /* Socket */
 #define SOCKET_MACRAW 0
 
+/* Port */
+#define PORT_LWIPERF 5001
+
 
 /**
   * ----------------------------------------------------------------------------------------------------
@@ -115,7 +118,7 @@ int main()
 
     netif_set_link_up(&g_netif);
     
-    // Start echoserver or lwiperf tcp server
+    // Start tcp echoserver
     tcp_echoserver_init();
     
 

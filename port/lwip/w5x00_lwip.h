@@ -17,6 +17,7 @@
   * Functions
   * ----------------------------------------------------------------------------------------------------
   */
+static uint ethernet_frame_crc(const uint8_t *data, int length);
 
 /*! \brief callback function
  *  \ingroup w5x00_lwip

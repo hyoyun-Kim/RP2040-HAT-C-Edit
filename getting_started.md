@@ -49,6 +49,7 @@ The ethernet examples use **Raspberry Pi Pico** and **WIZnet Ethernet HAT** - et
 Examples are available at '**RP2040-HAT-C-LWIP/examples/**' directory. As of now, following examples are provided.
 
 - [**DHCP & DNS**][link-dhcp_dns]
+- [**LOOPBACK**][link-loopback]
 - [**LWIPERF**][link-lwiperf]
 
 Note that **ioLibrary_Driver**, **mbedtls**, **pico-sdk**, **pico-extras** are needed to run ethernet examples. 
@@ -439,6 +440,7 @@ Link
 [link-w5100s-evb-pico_main]: https://github.com/Wiznet/RP2040-HAT-C/blob/main/static/images/getting_started/w5100s-evb-pico_main.png
 [link-dhcp_dns]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/tree/lwip-version/examples/dhcp_dns
 [link-lwiperf]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/tree/lwip-version/examples/lwiperf
+[link-loopback]: https://github.com/hyoyun-Kim/RP2040-HAT-C-Edit/tree/lwip-version/examples/loopback
 [link-ioLibrary_driver]: https://github.com/Wiznet/ioLibrary_Driver
 [link-mbedtls_library]: https://github.com/ARMmbed/mbedtls
 [link-pico_sdk]: https://github.com/raspberrypi/pico-sdk

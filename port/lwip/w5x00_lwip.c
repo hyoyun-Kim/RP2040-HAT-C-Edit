@@ -19,17 +19,62 @@
   */
 uint8_t mac[6] = {0xAA, 0x6F, 0x77, 0x47, 0x75, 0x8C};
 
+static uint8_t tx_frame[1542];
+static const uint32_t ethernet_polynomial_le = 0xedb88320U;
 
 /**
   * ----------------------------------------------------------------------------------------------------
   * Functions
   * ----------------------------------------------------------------------------------------------------
   */
+static uint ethernet_frame_crc(const uint8_t *data, int length)
+{
+    uint crc = 0xffffffff;  /* Initial value. */
+
+    while(--length >= 0) 
+    {
+        uint8_t current_octet = *data++;
+
+        for (int bit = 8; --bit >= 0; current_octet >>= 1) {
+          if ((crc ^ current_octet) & 1) {
+            crc >>= 1;
+            crc ^= ethernet_polynomial_le;
+          } else
+            crc >>= 1;
+        }
+    }
+
+    return ~crc;
+}
+
 err_t netif_output(struct netif *netif, struct pbuf *p)
 {
    uint send_len = 0;
+   uint tot_len = 0;
 
-   send_len = send_lwip(0, p->payload, p->len);
+   memset(tx_frame, 0x00, sizeof(tx_frame));
+
+   for(struct pbuf *q = p; q != NULL; q = q->next)
+   {
+      memcpy(tx_frame + tot_len, q->payload, q->len);
+
+      tot_len += q->len;
+
+      if(q->len == q->tot_len)
+      {
+         break;
+      }
+   }
+
+   if(tot_len < 60)
+   {
+      // pad
+      tot_len = 60;
+   }
+
+   uint crc = ethernet_frame_crc(tx_frame, tot_len);
+
+   send_len = send_lwip(0, tx_frame, tot_len);
 
    return ERR_OK;
 }
